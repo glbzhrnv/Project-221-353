@@ -2,6 +2,7 @@
 #define PROCESSORCORE_HPP
 
 #include <QtGlobal>
+#include <QJsonObject>
 #include "./ProcessorStorageCore.hpp"
 
 class ProcessorCore
@@ -12,7 +13,7 @@ public:
         ProcessorCore* parentProcessor = nullptr
     );
     ~ProcessorCore();
-    virtual int requestProcess(QByteArray* data) = 0;
+    virtual int requestProcess(QJsonObject* data) = 0;
 private:
     ProcessorStorageCore* parentStorage = nullptr;
     ProcessorCore* parentProcessor = nullptr;
