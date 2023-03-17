@@ -1,72 +1,51 @@
 #include "../include/ServerCore.hpp"
-#include <QDebug>
-#include <QCoreApplication>
 
-ServerCore::ServerCore(QObject *parent) : QObject(parent)
+ServerCore::ServerCore(QObject *parent): QObject(parent)
 {
     mTcpServer = new QTcpServer(this);
 
-    connect(
-        mTcpServer, &QTcpServer::newConnection,
-        this, &ServerCore::slotNewConnection
-    );
-
     if (!mTcpServer->listen(QHostAddress::Any, 33333)) {
         qDebug() << "Server setup failed";
-    } else {
-        state = 1;
-        qDebug() << "Server is setted up";
+
+        return;
     }
+
+    connect(
+        mTcpServer, &QTcpServer::newConnection,
+        this, &ServerCore::slotAddConnection
+    );
+
+    qDebug() << "Server is setted up";
 }
 
 ServerCore::~ServerCore()
 {
     mTcpServer->close();
-    state = 0;
 }
 
-void ServerCore::slotNewConnection()
+void ServerCore::slotAddConnection()
 {
-    if (state == 1) {
-        QTcpSocket* clientSocket = mTcpServer->nextPendingConnection();
-        clientSocketsVec.push_back(clientSocket);
+    quint64 socketId = QRandomGenerator::system()->generate64();
+    ClientCore* clientData = new ClientCore(
+        mTcpServer->nextPendingConnection(),
+        socketId
+    );
 
-        connect(
-            clientSocket, &QTcpSocket::readyRead,
-            this,&ServerCore::slotServerRead
-        );
-        connect(
-            clientSocket, &QTcpSocket::disconnected,
-            this, &ServerCore::slotClientDisconnected
-        );
-        clientSocket->write("Hello, World!!! I am echo server!\n");
+    connect(
+        clientData, &ClientCore::signalClientClose,
+        this, &ServerCore::slotDeleteConnection
+    );
 
-        qDebug() << "Client connected";
-    }
+    clientsMap[socketId] = clientData;
+
+    qDebug() << "Client connected";
 }
 
-void ServerCore::slotServerRead()
+void ServerCore::slotDeleteConnection(quint64 id)
 {
-    QByteArray request;
+    if (clientsMap.count(id) != 0) {
+        qDebug() << "Deleting socket";
 
-    while(mTcpSocket->bytesAvailable() > 0) {
-        request = mTcpSocket->readAll();
+        clientsMap.erase(id);
     }
-
-    if (request.size() == 0) {
-        return;
-    }
-
-    if (request == "quit") {
-        mTcpSocket->write("Good by!\n");
-        mTcpSocket->close();
-    } else {
-        mTcpSocket->write("Invalid request\n");
-    }
-
-    qDebug() << request;
-}
-
-void ServerCore::slotClientDisconnected(){
-    mTcpSocket->close();
 }

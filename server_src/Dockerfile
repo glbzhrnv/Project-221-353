@@ -1,20 +1,28 @@
-FROM ubuntu
+FROM ubuntu as core
 
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update
-RUN apt-get install -y libqt5network5 qt5-qmake qtbase5-dev-tools
-RUN apt-get install -y build-essential
+RUN apt-get upgrade -y
+RUN apt-get install -y \
+					build-essential \ 
+					qtbase5-dev \ 
+					qt5-qmake \ 
+					qtbase5-dev-tools
 
-WORKDIR /root/
-RUN mkdir server
-WORKDIR /root/server/
-COPY *.cpp /root/server/
-COPY *.h /root/server/
-COPY *.pro /root/server/
+RUN rm -rf /var/lib/apt/lists/*
 
-RUN qmake echoServer.pro
+
+FROM core
+
+RUN mkdir -p /var/server/
+
+COPY ./ /var/server/
+WORKDIR /var/server/
+
+RUN ls -l
+RUN qmake server.pro
 RUN make
 
-ENTRYPOINT ["./echoServer"]
+ENTRYPOINT ["./server"]

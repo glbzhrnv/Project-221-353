@@ -1,5 +1,5 @@
 QT -= gui
-QT += network
+QT += core network
 
 CONFIG -= app_bundle
 CONFIG += c++11 console
@@ -16,6 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/ClientCore.cpp \
+    src/Processor/GeneralProcessor.cpp \
+    src/ProcessorCore.cpp \
         src/main.cpp \
         src/ServerCore.cpp \
 
@@ -25,7 +28,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    include/ClientContainer.hpp \
+    include/ClientCore.hpp \
+    include/Processor/GeneralProcessor.hpp \
+    include/ProcessorCore.hpp \
+    include/ProcessorStorageCore.hpp \
     include/ServerCore.hpp
 
 DISTFILES += \

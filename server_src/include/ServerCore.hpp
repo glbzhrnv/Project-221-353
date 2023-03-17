@@ -1,26 +1,22 @@
 #ifndef SERVER_CORE_HPP
 #define SERVER_CORE_HPP
 
-#include <vector>
+#include <map>
+#include <QtGlobal>
+#include <QRandomGenerator>
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
-
-#include <QtNetwork>
-#include <QByteArray>
 #include <QDebug>
+
+#include "ClientCore.hpp"
 
 class ServerCore : public QObject
 {
     Q_OBJECT
 public slots:
-    void slotNewConnection();
-    void slotClientDisconnected();
-
-    void slotServerRead();
-
-signals:
-    void signalRegisterConnection();
+    void slotAddConnection();
+    void slotDeleteConnection(quint64 id);
 
 public:
     explicit ServerCore(QObject *parent = nullptr);
@@ -28,8 +24,7 @@ public:
 
 protected:
     QTcpServer* mTcpServer;
-    std::vector<QTcpSocket*>  clientSocketsVec;
-    int state = 0;
+    std::map<quint64, ClientCore*> clientsMap;
 };
 #endif // SERVER_CORE_HPP
 

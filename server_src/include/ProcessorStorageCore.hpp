@@ -1,0 +1,8 @@
+#ifndef PROCESSORSTORAGECORE_HPP
+#define PROCESSORSTORAGECORE_HPP
+
+class ProcessorStorageCore
+{
+};
+
+#endif // PROCESSORSTORAGECORE_HPP
