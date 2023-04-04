@@ -1,0 +1,4 @@
+{
+    "server_port": 33333,
+    "db_path" : "./server_db.sqlite"
+}

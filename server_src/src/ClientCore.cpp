@@ -1,8 +1,16 @@
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <memory>
 #include "../include/ClientCore.hpp"
+#include "../include/Processor/AuthUserProcessor.hpp"
+#include "../include/Processor/CreateUserProcessor.hpp"
 #include "qtcpsocket.h"
+
 
 ClientCore::ClientCore(QTcpSocket* socket, quint64 socketId): socket(socket), socketId(socketId)
 {
+//    this->socket = std::make_shared<QTcpSocket>(socket);
+
     connect(
         socket, &QTcpSocket::readyRead,
         this, &ClientCore::slotReadData
@@ -12,14 +20,22 @@ ClientCore::ClientCore(QTcpSocket* socket, quint64 socketId): socket(socket), so
         socket, &QTcpSocket::disconnected,
         this, &ClientCore::slotDisconnect
     );
-
-    socket->write("Hello, World!!! I am echo server!\n");
 }
 
 ClientCore::~ClientCore()
 {
-    qDebug() << "Deleting user object" << socketId;
+    qDebug("Deleting user object %llo", socketId);
     slotDisconnect();
+}
+
+QTcpSocket* ClientCore::getSocket()
+{
+    return socket;
+}
+
+quint64 ClientCore::getSocketId()
+{
+    return socketId;
 }
 
 void ClientCore::slotReadData()
@@ -37,12 +53,31 @@ void ClientCore::slotReadData()
     if (request == "q") {
         socket->write("\nGood by!\n");
         slotDisconnect();
+
+        return;
     } else {
-        socket->write(request); // echo
-//        socket->write("Invalid request\n");
+
     }
 
-    qDebug() << request;
+    QJsonDocument rq = QJsonDocument::fromJson(request);
+    if (!rq.isObject()) {
+        socket->write("Invalid request\n");
+
+        return;
+    }
+    QJsonObject rqObject = rq.object();
+
+    switch (rqObject["method"].toInt()) {
+        case CreateUserProcessor::AUTH_METHOD:
+            CreateUserProcessor::process(rqObject["params"], this);
+            break;
+        case AuthUserProcessor::AUTH_METHOD:
+            AuthUserProcessor::process(rqObject["params"], this);
+            break;
+        default:
+            socket->write("\nInvalid request\n");
+            break;
+    }
 }
 
 void ClientCore::slotDisconnect()
@@ -52,7 +87,5 @@ void ClientCore::slotDisconnect()
         emit signalClientClose(socketId);
 
         socket->close();
-
-        deleteLater();
     }
 }

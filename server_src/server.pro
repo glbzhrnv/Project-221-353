@@ -1,8 +1,8 @@
 QT -= gui
-QT += core network
+QT += core network sql
 
 CONFIG -= app_bundle
-CONFIG += c++11 console
+CONFIG += c++21 console
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -17,8 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/ClientCore.cpp \
-    src/Processor/GeneralProcessor.cpp \
-    src/ProcessorCore.cpp \
+    src/Processor/AuthUserProcessor.cpp \
+    src/Processor/CreateUserProcessor.cpp \
+    src/SharedObjects.cpp \
         src/main.cpp \
         src/ServerCore.cpp \
 
@@ -29,10 +30,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     include/ClientCore.hpp \
-    include/Processor/GeneralProcessor.hpp \
-    include/ProcessorCore.hpp \
-    include/ProcessorStorageCore.hpp \
-    include/ServerCore.hpp
+    include/Exception/AbstractRuntimeException.hpp \
+    include/Exception/ConfigurationException.hpp \
+    include/Exception/ConnectionException.hpp \
+    include/Processor/AbstractProcessor.hpp \
+    include/Processor/AuthUserProcessor.hpp \
+    include/Processor/CreateUserProcessor.hpp \
+    include/ServerCore.hpp \
+    include/SharedObjects.hpp
 
 DISTFILES += \
     Dockerfile
