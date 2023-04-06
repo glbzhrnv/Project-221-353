@@ -24,7 +24,7 @@ SharedObjects::SharedObjects()
     }
     settings = settingsDoc.object();
 
-//    setupDatabaseConnection();
+    setupDatabaseConnection();
 }
 
 void SharedObjects::setSettingsFilePath(std::string path)
@@ -54,12 +54,6 @@ const QSqlDatabase SharedObjects::getDatabase()
 {
     return dbConnection;
 }
-
-//template <typename T>
-//const QJsonValue SharedObjects::operator[](T q)
-//{
-//    return settings[q];
-//}
 
 void SharedObjects::setupDatabaseConnection()
 {

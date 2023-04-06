@@ -6,6 +6,7 @@
 #define CREATEUSERPROCESSOR_HPP
 
 #include <QJsonObject>
+#include <QSqlDatabase>
 #include "AbstractProcessor.hpp"
 #include "../ClientCore.hpp"
 
@@ -43,8 +44,6 @@ namespace CreateUser
          * @param client Указатель на объект клиента
          */
         static QByteArray process(QJsonObject params, ClientCore* client);
-
-        static void setupMigration(QSqlDatabase connection)
     };
 }
 

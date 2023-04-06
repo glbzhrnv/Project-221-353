@@ -27,7 +27,7 @@ void ServerCore::setupSocket()
         throw new ConfigurationException("'server_port' must be a number");
     }
 
-    if (!mTcpServer->listen(QHostAddress::Any, 3333)) {
+    if (!mTcpServer->listen(QHostAddress::Any, port.toInt())) {
         throw new ConnectionException("Unable to open server socket");
     }
 
