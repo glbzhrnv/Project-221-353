@@ -4,11 +4,18 @@
  */
 
 /**
+ * @defgroup processor_response_code
+ * @brief Коды возврата различных процессоров
+ */
+
+/**
  * @file
  * @brief Абстрактный обработчик запросов
  */
 #ifndef ABSTRACTPROCESSOR_HPP
 #define ABSTRACTPROCESSOR_HPP
+
+#include <QJsonObject>
 
 /**
  * @ingroup processor
@@ -18,6 +25,8 @@
  */
 class AbstractProcessor
 {
+protected:
+    static QByteArray createResponse(int code, QJsonObject* response = nullptr);
 };
 
 #endif // ABSTRACTPROCESSOR_HPP

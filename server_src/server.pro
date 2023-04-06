@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/ClientCore.cpp \
+    src/Processor/AbstractProcessor.cpp \
     src/Processor/AuthUserProcessor.cpp \
     src/Processor/CreateUserProcessor.cpp \
     src/SharedObjects.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     include/Exception/AbstractRuntimeException.hpp \
     include/Exception/ConfigurationException.hpp \
     include/Exception/ConnectionException.hpp \
+    include/Migration/AbstractMigration.hpp \
     include/Processor/AbstractProcessor.hpp \
     include/Processor/AuthUserProcessor.hpp \
     include/Processor/CreateUserProcessor.hpp \

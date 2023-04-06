@@ -43,7 +43,10 @@ void ClientCore::slotReadData()
     QByteArray request;
 
     while(socket->bytesAvailable() > 0) {
-        request = socket->readAll();
+        if (request.size() > REQUEST_MAX_SIZE) {
+            break;
+        }
+        request = socket->read(REQUEST_MAX_SIZE);
     }
 
     if (request.size() == 0) {
@@ -55,8 +58,6 @@ void ClientCore::slotReadData()
         slotDisconnect();
 
         return;
-    } else {
-
     }
 
     QJsonDocument rq = QJsonDocument::fromJson(request);
@@ -65,19 +66,24 @@ void ClientCore::slotReadData()
 
         return;
     }
-    QJsonObject rqObject = rq.object();
+    QJsonObject
+        requestObject = rq.object(),
+        params = requestObject["params"].toObject();
 
-    switch (rqObject["method"].toInt()) {
-        case CreateUserProcessor::AUTH_METHOD:
-            CreateUserProcessor::process(rqObject["params"], this);
+    QByteArray result;
+    switch (requestObject["method"].toInt()) {
+        case CreateUser::METHOD_ID:
+            result = CreateUser::Processor::process(params, this);
             break;
-        case AuthUserProcessor::AUTH_METHOD:
-            AuthUserProcessor::process(rqObject["params"], this);
+        case AuthUser::METHOD_ID:
+            result = AuthUser::Processor::process(params, this);
             break;
         default:
-            socket->write("\nInvalid request\n");
+            result = "\nInvalid request\n";
             break;
     }
+
+    socket->write(result);
 }
 
 void ClientCore::slotDisconnect()

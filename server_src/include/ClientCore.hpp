@@ -9,6 +9,13 @@
 #include <QtGlobal>
 #include <QTcpSocket>
 
+/// Возможные состояния пользователя
+enum UserStatus: int
+{
+    NO_AUTH = 0, //< Не авторизован
+    LOGGED_IN = 1, //< Обычный пользователь
+};
+
 /**
  * @brief Хранилище соединения клиента
  */
@@ -24,6 +31,8 @@ signals:
     void signalClientClose(quint64 id);
 
 public:
+    inline static constexpr int REQUEST_MAX_SIZE = 16384;
+
     explicit ClientCore(QTcpSocket* connection, quint64 id);
 
     ~ClientCore();
@@ -39,6 +48,10 @@ public:
      * @return quint64 Идентификатор сокета
      */
     quint64 getSocketId();
+
+    void setUserStatus(UserStatus value);
+
+    UserStatus getUserStatus();
 
 public slots:
     /**
@@ -59,6 +72,11 @@ protected:
      * 1 - Сокет закрыт
      */
     int state = 0;
+
+    /**
+     * Текущий статус пользователя
+     */
+    int userStatus = UserStatus::NO_AUTH;
 
     /**
      * @brief Указатель на пользовательский сокет

@@ -49,6 +49,8 @@ public:
 
     /**
      * @brief Производит создание серверного сокета
+     * @throws ConfigurationException В случае ошибки в конфигурации
+     * @throws ConnectionException В случае невозможности открыть сокет
      */
     void setupSocket();
 

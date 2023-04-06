@@ -66,11 +66,18 @@ void SharedObjects::setupDatabaseConnection()
     QString dbFileName = settings["db_location"].toString();
     dbFileName = dbFileName == "" ? ":memory:" : dbFileName;
 
+    QFile dbFile(dbFileName);
+    bool setupMigrations = dbFile.exists();
+
     QSqlDatabase connection = QSqlDatabase::addDatabase("QSQLITE");
     connection.setDatabaseName(dbFileName);
 
     if (!connection.open()) {
         throw new ConfigurationException("Unable to connect to the database");
+    }
+
+    if (setupMigrations) {
+
     }
 
     dbConnection = std::move(connection);

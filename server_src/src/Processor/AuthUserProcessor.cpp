@@ -1,6 +1,6 @@
 #include "../../include/Processor/AuthUserProcessor.hpp"
 
-void AuthUserProcessor::process(QJsonValue params, ClientCore* client)
+QByteArray AuthUser::Processor::process(QJsonObject params, ClientCore* client)
 {
-    client->getSocket()->write("\nLogining in\n");
+    return "\nLogining in\n";
 }

@@ -5,30 +5,43 @@
 #ifndef AUTHUSERPROCESSOR_HPP
 #define AUTHUSERPROCESSOR_HPP
 
-#include <QJsonValue>
+#include <QJsonObject>
 #include "AbstractProcessor.hpp"
 #include "../ClientCore.hpp"
 
-/**
- * @ingroup processor
- * @brief Обработчик запроса на авторизацию
- *
- * Позволяет пользователю авторизоваться в системе
- */
-class AuthUserProcessor: public AbstractProcessor
+namespace AuthUser
 {
-public:
     /**
      * @brief Идентификатор метода
      */
-    inline static const int AUTH_METHOD = 0;
+    inline static const int METHOD_ID = 0;
 
     /**
-     * @brief Производит обработку пользовательского запроса
-     * @param params Параметры запроса
-     * @param client Указатель на объект клиента
+     * @ingroup processor_response_code
+     * @brief Коды состояния процессора CreateUserProcessor
      */
-    static void process(QJsonValue params, ClientCore* client);
-};
+    enum ResponseCode: int
+    {
+        SUCCESS = 0, //< Авторизация успешна
+        INVALID_PASSWORD = 1, //< Не верный логин или пароль
+    };
+
+    /**
+     * @ingroup processor
+     * @brief Обработчик запроса на авторизацию
+     *
+     * Позволяет пользователю авторизоваться в системе
+     */
+    class Processor: public AbstractProcessor
+    {
+    public:
+        /**
+         * @brief Производит обработку пользовательского запроса
+         * @param params Параметры запроса
+         * @param client Указатель на объект клиента
+         */
+        static QByteArray process(QJsonObject params, ClientCore* client);
+    };
+}
 
 #endif // AUTHUSERPROCESSOR_HPP
