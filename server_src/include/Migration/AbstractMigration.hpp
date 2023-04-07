@@ -6,7 +6,8 @@
 class AbstractMigration
 {
 public:
-    static void startMigration();
+    virtual ~AbstractMigration();
+    virtual void startMigration(QSqlDatabase connection) = 0;
 };
 
 #endif // ABSTRACTMIGRATION_HPP

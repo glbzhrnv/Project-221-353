@@ -2,10 +2,10 @@
 #include <QDebug>
 #include <QRandomGenerator>
 #include <QTcpServer>
-#include "../include/ServerCore.hpp"
-#include "../include/SharedObjects.hpp"
-#include "../include/Exception/ConfigurationException.hpp"
-#include "../include/Exception/ConnectionException.hpp"
+#include "Exception/ConfigurationException.hpp"
+#include "Exception/ConnectionException.hpp"
+#include "ServerCore.hpp"
+#include "SharedObjects.hpp"
 
 ServerCore::ServerCore(QObject *parent): QObject(parent)
 {

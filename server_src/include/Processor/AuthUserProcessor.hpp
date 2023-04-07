@@ -7,20 +7,20 @@
 
 #include <QJsonObject>
 #include "AbstractProcessor.hpp"
-#include "../ClientCore.hpp"
+#include "ClientCore.hpp"
 
 namespace AuthUser
 {
     /**
      * @brief Идентификатор метода
      */
-    inline static const int METHOD_ID = 0;
+    inline static const int32_t METHOD_ID = 0;
 
     /**
      * @ingroup processor_response_code
      * @brief Коды состояния процессора CreateUserProcessor
      */
-    enum ResponseCode: int
+    enum ResponseCode: int32_t
     {
         SUCCESS = 0, //< Авторизация успешна
         INVALID_PASSWORD = 1, //< Не верный логин или пароль

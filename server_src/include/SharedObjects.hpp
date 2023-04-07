@@ -44,6 +44,8 @@ public:
      * @return const QSqlDatabase Соединение с БД
      */
     const QSqlDatabase getDatabase();
+
+    ~SharedObjects();
 protected:
     /**
      * @brief Узакатель на общий экзмпляр класса

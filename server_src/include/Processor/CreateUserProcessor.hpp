@@ -7,20 +7,20 @@
 
 #include <QJsonObject>
 #include <QSqlDatabase>
-#include "AbstractProcessor.hpp"
-#include "../ClientCore.hpp"
+#include "Processor/AbstractProcessor.hpp"
+#include "ClientCore.hpp"
 
 namespace CreateUser
 {
     /**
      * @brief Идентификатор метода
      */
-    inline static const int METHOD_ID = 1;
+    inline static const int32_t METHOD_ID = 1;
     /**
      * @ingroup processor_response_code
      * @brief Коды состояния процессора CreateUserProcessor
      */
-    enum ResponseCode: int
+    enum ResponseCode: int32_t
     {
         SUCCESS = 0, //< Пользователь успешно создан
         ALREADY_LOGGED_IN = 1, //< Пользователь уже авторизован. Создание аккаунта невозможно

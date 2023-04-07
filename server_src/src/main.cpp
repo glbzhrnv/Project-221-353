@@ -1,15 +1,19 @@
 #include <QCoreApplication>
 #include <QDebug>
-#include "../include/ServerCore.hpp"
-#include "../include/SharedObjects.hpp"
+#include <iostream>
+#include "ServerCore.hpp"
+#include "SharedObjects.hpp"
+#include "Tools/PasswordTools.hpp"
 
-int main(int argc, char *argv[])
+int32_t main(int32_t argc, char *argv[])
 {
     if (argc < 2) {
         qFatal("Settings file is not set");
 
         return 1;
     }
+
+    std::cout << PasswordTools::passwordHash("asd") << std::endl;
 
     QCoreApplication app(argc, argv);
 

@@ -1,8 +1,10 @@
 #include <QFile>
+#include <QFileInfo>
 #include <QIODevice>
 #include <QJsonDocument>
-#include "../include/Exception/ConfigurationException.hpp"
-#include "../include/SharedObjects.hpp"
+#include "Exception/ConfigurationException.hpp"
+#include "Migration/MigrationsIndex.hpp"
+#include "SharedObjects.hpp"
 
 SharedObjects::SharedObjects()
 {
@@ -25,6 +27,11 @@ SharedObjects::SharedObjects()
     settings = settingsDoc.object();
 
     setupDatabaseConnection();
+}
+
+SharedObjects::~SharedObjects()
+{
+    dbConnection.close();
 }
 
 void SharedObjects::setSettingsFilePath(std::string path)
@@ -60,8 +67,7 @@ void SharedObjects::setupDatabaseConnection()
     QString dbFileName = settings["db_location"].toString();
     dbFileName = dbFileName == "" ? ":memory:" : dbFileName;
 
-    QFile dbFile(dbFileName);
-    bool setupMigrations = dbFile.exists();
+    bool setupMigrations = !QFileInfo::exists(dbFileName);
 
     QSqlDatabase connection = QSqlDatabase::addDatabase("QSQLITE");
     connection.setDatabaseName(dbFileName);
@@ -71,8 +77,8 @@ void SharedObjects::setupDatabaseConnection()
     }
 
     if (setupMigrations) {
-
+        MigrationsIndex::setup(connection);
     }
 
-    dbConnection = std::move(connection);
+    dbConnection = connection;
 }

@@ -1,20 +1,22 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDateTime>
-#include "../../include/Processor/AbstractProcessor.hpp"
+#include "Processor/AbstractProcessor.hpp"
 
 QByteArray AbstractProcessor::createResponse(
-    int code,
+    int32_t code,
     QJsonObject* response
 ) {
-    QJsonObject result, midResponse;
+    QJsonObject midResponse;
     if (response != nullptr) {
         midResponse = *response;
     }
 
-    result["code"] = code;
-    result["response"] = midResponse;
-    result["stamp"] = QDateTime::currentSecsSinceEpoch();
+    QJsonObject result = {
+        {"code", code},
+        {"response", midResponse},
+        {"stamp", QDateTime::currentSecsSinceEpoch()}
+    };
 
     return QJsonDocument(result).toJson();
 }

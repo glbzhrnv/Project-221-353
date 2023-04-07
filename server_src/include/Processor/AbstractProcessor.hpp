@@ -26,7 +26,7 @@
 class AbstractProcessor
 {
 protected:
-    static QByteArray createResponse(int code, QJsonObject* response = nullptr);
+    static QByteArray createResponse(int32_t code, QJsonObject* response = nullptr);
 };
 
 #endif // ABSTRACTPROCESSOR_HPP

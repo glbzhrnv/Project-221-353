@@ -10,6 +10,8 @@ CONFIG += c++21 console
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+INCLUDEPATH += $$PWD/include/
+
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -17,10 +19,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/ClientCore.cpp \
+    src/Migration/AbstractMigration.cpp \
     src/Processor/AbstractProcessor.cpp \
     src/Processor/AuthUserProcessor.cpp \
     src/Processor/CreateUserProcessor.cpp \
     src/SharedObjects.cpp \
+    src/Tools/PasswordTools.cpp \
         src/main.cpp \
         src/ServerCore.cpp \
 
@@ -35,11 +39,15 @@ HEADERS += \
     include/Exception/ConfigurationException.hpp \
     include/Exception/ConnectionException.hpp \
     include/Migration/AbstractMigration.hpp \
+    include/Migration/MigrationsIndex.hpp \
+    include/Migration/UserMigration.hpp \
     include/Processor/AbstractProcessor.hpp \
     include/Processor/AuthUserProcessor.hpp \
     include/Processor/CreateUserProcessor.hpp \
     include/ServerCore.hpp \
-    include/SharedObjects.hpp
+    include/SharedObjects.hpp \
+    include/Tools/PasswordTools.hpp
 
 DISTFILES += \
-    Dockerfile
+    Dockerfile \
+    Doxyfile

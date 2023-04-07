@@ -1,4 +1,4 @@
-#include "../../include/Processor/AuthUserProcessor.hpp"
+#include "Processor/AuthUserProcessor.hpp"
 
 QByteArray AuthUser::Processor::process(QJsonObject params, ClientCore* client)
 {

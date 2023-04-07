@@ -1,11 +1,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <memory>
-#include "../include/ClientCore.hpp"
-#include "../include/Processor/AuthUserProcessor.hpp"
-#include "../include/Processor/CreateUserProcessor.hpp"
-#include "qtcpsocket.h"
-
+#include "Processor/AuthUserProcessor.hpp"
+#include "Processor/CreateUserProcessor.hpp"
+#include "ClientCore.hpp"
 
 ClientCore::ClientCore(QTcpSocket* socket, quint64 socketId): socket(socket), socketId(socketId)
 {
@@ -84,6 +81,16 @@ void ClientCore::slotReadData()
     }
 
     socket->write(result);
+}
+
+void ClientCore::setUserStatus(UserStatus value)
+{
+    userStatus = value;
+}
+
+UserStatus ClientCore::getUserStatus()
+{
+    return userStatus;
 }
 
 void ClientCore::slotDisconnect()

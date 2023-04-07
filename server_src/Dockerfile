@@ -6,10 +6,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y \
-					build-essential \ 
-					qtbase5-dev \ 
-					qt5-qmake \ 
-					qtbase5-dev-tools
+            build-essential \
+            qtbase5-dev \
+            qt5-qmake \
+            qtbase5-dev-tools
 
 RUN rm -rf /var/lib/apt/lists/*
 
