@@ -1,38 +1,54 @@
 #include "Tools/PasswordTools.hpp"
-#include <argon2.h>
+#include <cstdint>
 #include <random>
+#include <stdlib.h>
+#include <argon2.h>
+#include <string.h>
+
+uint8_t* PasswordTools::genSalt(uint32_t size)
+{
+    uint8_t *result = (uint8_t*)malloc(size);
+
+    for(uint32_t i = 0; i < size; i++) {
+        result[i] = (uint8_t)rand();
+    }
+
+    return result;
+}
 
 std::string PasswordTools::passwordHash(std::string password)
 {
-    const char* pwd = password.c_str();
-    char salt = random();
-
     size_t encoded_len = argon2_encodedlen(
         t_cost, m_cost,
         parallelism,
         salt_len, hash_len,
         Argon2_type::Argon2_id
     );
+    char *encoded = (char*)malloc(encoded_len);
 
-    char* encoded = new char(encoded_len);
-
+    uint8_t *salt = PasswordTools::genSalt(salt_len);
     argon2id_hash_encoded(
         t_cost, m_cost,
         parallelism,
-        pwd, password.size(),
-        &salt, salt_len,
+        password.c_str(), password.size(),
+        salt, salt_len,
         hash_len,
         encoded, encoded_len
     );
 
-    std::string str(encoded);
-//    delete encoded;
+    std::string result(encoded, encoded_len);
+    free(encoded);
+    free(salt);
 
-    return str;
+    return result;
 }
 
 
-//bool PasswordTools::passwordVerify(std::string password, std::string hash)
-//{
-//    return false;
-//}
+bool PasswordTools::passwordVerify(std::string password, std::string hash)
+{
+    return argon2id_verify(
+        hash.c_str(),
+        password.c_str(),
+        password.size()
+    ) == ARGON2_OK;
+}

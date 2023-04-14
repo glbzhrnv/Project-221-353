@@ -1,9 +1,10 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "ServerCore.hpp"
 #include "SharedObjects.hpp"
-#include "Tools/PasswordTools.hpp"
 
 int32_t main(int32_t argc, char *argv[])
 {
@@ -13,7 +14,7 @@ int32_t main(int32_t argc, char *argv[])
         return 1;
     }
 
-    std::cout << PasswordTools::passwordHash("asd") << std::endl;
+    srand(time(NULL));
 
     QCoreApplication app(argc, argv);
 

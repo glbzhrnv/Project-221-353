@@ -13,7 +13,7 @@ public:
         query.exec(
             "CREATE TABLE IF NOT EXISTS User("
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                "login VARCHAR(20) NOT NULL,"
+                "login VARCHAR(20) NOT NULL UNIQUE,"
                 "password VARCHAR(100) NOT NULL,"
                 "status TINYINT(1) NOT NULL DEFAULT(0),"
                 "permissions INT UNSIGNED NOT NULL DEFAULT(0)"

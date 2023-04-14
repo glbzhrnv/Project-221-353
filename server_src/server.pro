@@ -3,6 +3,7 @@ QT += core network sql
 
 CONFIG -= app_bundle
 CONFIG += c++21 console
+#sanitizer sanitize_address
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -11,6 +12,8 @@ CONFIG += c++21 console
 DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += $$PWD/include/
+
+LIBS += -largon2
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

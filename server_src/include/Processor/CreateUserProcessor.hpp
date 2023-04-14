@@ -24,9 +24,9 @@ namespace CreateUser
     {
         SUCCESS = 0, //< Пользователь успешно создан
         ALREADY_LOGGED_IN = 1, //< Пользователь уже авторизован. Создание аккаунта невозможно
-        INVALID_PASSWORD = 2, //< Не верный логин или пароль
-        LOGIN_TAKEN = 3, //< Данный пользователь уже зарегистрирован
-        WEAK_PASSWORD = 4, //< Пароль не отвечает требованиям безопасности
+        INVALID_LOGIN = 2, //< Логин не соответствует требованиям
+        INVALID_PASSWORD = 3, //< Пароль не соответствует требованиям
+        LOGIN_ALREADY_TAKEN = 4, //< Данный пользователь уже зарегистрирован
     };
 
     /**
@@ -37,6 +37,10 @@ namespace CreateUser
      */
     class Processor: public AbstractProcessor
     {
+    protected:
+        static bool isUserExists(std::string login);
+
+        static void Create(std::string login, std::string password);
     public:
         /**
          * @brief Производит обработку пользовательского запроса

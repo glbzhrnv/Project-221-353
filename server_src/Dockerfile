@@ -9,7 +9,8 @@ RUN apt-get install -y \
             build-essential \
             qtbase5-dev \
             qt5-qmake \
-            qtbase5-dev-tools
+            qtbase5-dev-tools \
+            libargon2-0-dev
 
 RUN rm -rf /var/lib/apt/lists/*
 

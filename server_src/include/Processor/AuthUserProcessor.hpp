@@ -6,6 +6,7 @@
 #define AUTHUSERPROCESSOR_HPP
 
 #include <QJsonObject>
+//#include <QVariant>
 #include "AbstractProcessor.hpp"
 #include "ClientCore.hpp"
 
@@ -34,6 +35,8 @@ namespace AuthUser
      */
     class Processor: public AbstractProcessor
     {
+    protected:
+//        static QVariant getuser(std::string login);
     public:
         /**
          * @brief Производит обработку пользовательского запроса
