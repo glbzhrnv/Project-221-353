@@ -51,7 +51,7 @@ QByteArray CreateUser::Processor::process(QJsonObject params, ClientCore* client
     }
 
     if (CreateUser::Processor::isUserExists(login)) {
-        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::INVALID_PASSWORD);
+        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::LOGIN_ALREADY_TAKEN);
     }
 
 
