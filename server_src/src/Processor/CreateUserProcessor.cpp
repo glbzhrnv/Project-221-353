@@ -54,7 +54,6 @@ QByteArray CreateUser::Processor::process(QJsonObject params, ClientCore* client
         return CreateUser::Processor::createResponse(CreateUser::ResponseCode::LOGIN_ALREADY_TAKEN);
     }
 
-
     CreateUser::Processor::Create(login, password);
 
     return CreateUser::Processor::createResponse(CreateUser::ResponseCode::SUCCESS);

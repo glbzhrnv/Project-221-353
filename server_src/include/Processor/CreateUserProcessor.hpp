@@ -15,7 +15,7 @@ namespace CreateUser
     /**
      * @brief Идентификатор метода
      */
-    inline static const int32_t METHOD_ID = 1;
+    inline static const int32_t METHOD_ID = 2;
     /**
      * @ingroup processor_response_code
      * @brief Коды состояния процессора CreateUserProcessor

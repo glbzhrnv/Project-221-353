@@ -15,7 +15,7 @@ namespace AuthUser
     /**
      * @brief Идентификатор метода
      */
-    inline static const int32_t METHOD_ID = 0;
+    inline static const int32_t METHOD_ID = 1;
 
     /**
      * @ingroup processor_response_code

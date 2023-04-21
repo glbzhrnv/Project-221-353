@@ -28,7 +28,7 @@ class AbstractProcessor
 public:
     inline static const std::string LOGIN_REGEX = "^\\w{3,20}$";
     inline static const std::string PASSWORD_REGEX = "^\\w{8,64}$";
-protected:
+
     static QByteArray createResponse(int32_t code, QJsonObject* response = nullptr);
 };
 

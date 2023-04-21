@@ -24,6 +24,6 @@ WORKDIR /var/server/
 
 RUN ls -l
 RUN qmake server.pro
-RUN make
+RUN make -j
 
-ENTRYPOINT ["./server"]
+ENTRYPOINT ["./server", "asd.json"]

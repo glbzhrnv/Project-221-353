@@ -1,5 +1,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "Processor/AbstractProcessor.hpp"
 #include "Processor/AuthUserProcessor.hpp"
 #include "Processor/CreateUserProcessor.hpp"
 #include "ClientCore.hpp"
@@ -37,7 +38,7 @@ quint64 ClientCore::getSocketId()
 
 void ClientCore::slotReadData()
 {
-    QByteArray request;
+    QByteArray request, result;
 
     while(socket->bytesAvailable() > 0) {
         if (request.size() > REQUEST_MAX_SIZE) {
@@ -51,33 +52,26 @@ void ClientCore::slotReadData()
     }
 
     if (request == "q") {
-        socket->write("\nGood by!\n");
         slotDisconnect();
 
         return;
     }
 
+    result = AbstractProcessor::createResponse(-2);
     QJsonDocument rq = QJsonDocument::fromJson(request);
-    if (!rq.isObject()) {
-        socket->write("Invalid request\n");
+    if (rq.isObject()) {
+        QJsonObject
+            requestObject = rq.object(),
+            params = requestObject["params"].toObject();
 
-        return;
-    }
-    QJsonObject
-        requestObject = rq.object(),
-        params = requestObject["params"].toObject();
-
-    QByteArray result;
-    switch (requestObject["method"].toInt()) {
-        case CreateUser::METHOD_ID:
-            result = CreateUser::Processor::process(params, this);
-            break;
-        case AuthUser::METHOD_ID:
-            result = AuthUser::Processor::process(params, this);
-            break;
-        default:
-            result = "\nInvalid request\n";
-            break;
+        switch (requestObject["method"].toInt()) {
+            case CreateUser::METHOD_ID:
+                result = CreateUser::Processor::process(params, this);
+                break;
+            case AuthUser::METHOD_ID:
+                result = AuthUser::Processor::process(params, this);
+                break;
+        }
     }
 
     socket->write(result);
