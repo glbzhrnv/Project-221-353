@@ -37,10 +37,6 @@ namespace CreateUser
      */
     class Processor: public AbstractProcessor
     {
-    protected:
-        static bool isUserExists(std::string login);
-
-        static void Create(std::string login, std::string password);
     public:
         /**
          * @brief Производит обработку пользовательского запроса

@@ -1,0 +1,21 @@
+compilation_database_dir: .
+output_directory: puml
+diagrams:
+    AbstractAdapter:
+        type: class
+        glob:
+            - ./src/*/*.cpp
+            - ./src/*/*.hpp
+        include:
+            elements:
+                - AbstractRuntimeException
+                - ConfigurationException
+                - ConnectionException
+                - AbstractMigration
+                - MigrationsIndex
+                - UserMigration
+                - AbstractProcessor
+                - PasswordTools
+                - ClientCore
+                - ServerCore
+                - SharedObjects

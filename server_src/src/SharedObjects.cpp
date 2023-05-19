@@ -8,24 +8,7 @@
 
 SharedObjects::SharedObjects()
 {
-    if (settingsFilePath == "") {
-        throw new ConfigurationException("Configuration file path is not set");
-    }
-
-    QFile settingsFile(settingsFilePath.c_str());
-    settingsFile.open(QIODevice::ReadOnly|QIODevice::Text);
-    if (!settingsFile.isReadable()) {
-        throw new ConfigurationException("Unable to read settings file");
-    }
-    QString rawSettings = settingsFile.readAll();
-    settingsFile.close();
-
-    QJsonDocument settingsDoc = QJsonDocument::fromJson(rawSettings.toUtf8());
-    if (!settingsDoc.isObject()) {
-        throw new ConfigurationException("Settings file is empty");
-    }
-    settings = settingsDoc.object();
-
+    setupSettings();
     setupDatabaseConnection();
 }
 
@@ -36,8 +19,10 @@ SharedObjects::~SharedObjects()
 
 void SharedObjects::setSettingsFilePath(std::string path)
 {
-    if (!self) {
-        settingsFilePath = path;
+    settingsFilePath = path;
+
+    if (self) {
+        self->setupSettings();
     }
 }
 
@@ -60,6 +45,29 @@ const QJsonObject SharedObjects::getSettings()
 const QSqlDatabase SharedObjects::getDatabase()
 {
     return dbConnection;
+}
+
+void SharedObjects::setupSettings()
+{
+    if (settingsFilePath == "") {
+        throw new ConfigurationException("Configuration file path is not set");
+    }
+
+    QFile settingsFile(settingsFilePath.c_str());
+    settingsFile.open(QIODevice::ReadOnly|QIODevice::Text);
+    if (!settingsFile.isReadable()) {
+        throw new ConfigurationException("Unable to read settings file");
+    }
+
+    QString rawSettings = settingsFile.readAll();
+    settingsFile.close();
+
+    QJsonDocument settingsDoc = QJsonDocument::fromJson(rawSettings.toUtf8());
+    if (!settingsDoc.isObject()) {
+        throw new ConfigurationException("Settings file is empty");
+    }
+
+    settings = settingsDoc.object();
 }
 
 void SharedObjects::setupDatabaseConnection()

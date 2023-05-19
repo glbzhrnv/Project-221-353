@@ -15,7 +15,6 @@ int32_t main(int32_t argc, char *argv[])
     }
 
     srand(time(NULL));
-
     QCoreApplication app(argc, argv);
 
     SharedObjects::setSettingsFilePath(argv[1]);

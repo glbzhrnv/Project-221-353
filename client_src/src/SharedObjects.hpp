@@ -1,13 +1,16 @@
 /**
  * @file
- * @brief Хранилище разделённых объектов сервера
+ * @brief Хранилище разделённых объектов клиента
 */
 #ifndef SHAREDOBJECTS_HPP
 #define SHAREDOBJECTS_HPP
 
+#include "Adapter/AbstractAdapter.hpp"
 #include <memory>
+#include <map>
+#include <QTcpSocket>
 #include <QJsonObject>
-#include <QSqlDatabase>
+#include <QWidget>
 
 /**
  * @brief Хранилище разделённых объектов сервера
@@ -15,6 +18,8 @@
 class SharedObjects
 {
 public:
+    ~SharedObjects();
+
     /**
      * @brief Устанавливает путь до файла с конфигурацией
      * @param path Путь до конфигурации
@@ -25,6 +30,7 @@ public:
      * Пример конфигурации можно найти здесь: /examples/configuration.json
      */
     static void setSettingsFilePath(std::string path);
+
     /**
      * @brief Возвращает указатель  на общий экземпляр класса SharedObjects
      * @return std::shared_ptr<SharedObjects> Указатель на общий экземпляр класса
@@ -40,29 +46,47 @@ public:
     const QJsonObject getSettings();
 
     /**
-     * @brief Возвращает объект соединения с БД
-     * @return const QSqlDatabase Соединение с БД
+     * @brief Возвращает экземпляр сокета
+     * @return QTcpSocket Экземпляр сокета
      */
-    const QSqlDatabase getDatabase();
+    std::shared_ptr<QTcpSocket> getSocket();
 
-    ~SharedObjects();
+    uint64_t windowIdGet(uint32_t name, uint32_t copy);
+
+    bool windowExists(uint32_t name, uint32_t copy);
+
+    bool windowExists(uint64_t windowId);
+
+    void windowSet(QWidget* window, uint32_t name, uint32_t copy = 0);
+
+    std::shared_ptr<QWidget> windowGet(uint32_t name, uint32_t copy = 0);
+
+    void adapterAdd(AbstractAdapter*);
+
 protected:
     /**
      * @brief Узакатель на общий экзмпляр класса
      */
-    inline static std::shared_ptr<SharedObjects> self;
+    static std::shared_ptr<SharedObjects> self;
+
     /**
      * @brief Путь до конфигурации
      */
-    inline static std::string settingsFilePath;
+    static std::string settingsFilePath;
+
     /**
      * @brief Объект, содержащий параметры конфигурации
      */
     QJsonObject settings;
+
     /**
-     * @brief Соединение с БД
+     * @brief Экземпляр сокета
      */
-    QSqlDatabase dbConnection;
+    std::shared_ptr<QTcpSocket> socket;
+
+    std::map<uint64_t, std::shared_ptr<QWidget>>* windowsHeap;
+
+    std::vector<std::unique_ptr<AbstractAdapter>>* adaptersHeap;
 
     /**
      * @brief Защищённый конструктор
@@ -77,16 +101,11 @@ protected:
     SharedObjects(const SharedObjects&) = delete;
 
     /**
-     * @brief Удаление оператора копирующего присваивания
+     * @brief Удаление копирующего конструктора
      */
-    SharedObjects& operator=(SharedObjects&) = delete;
+    SharedObjects& operator= (SharedObjects&) = delete;
 
     void setupSettings();
-
-    /**
-     * @brief Метод резервирования порта подключения
-     */
-    void setupDatabaseConnection();
 };
 
 #endif // SHAREDOBJECTS_HPP

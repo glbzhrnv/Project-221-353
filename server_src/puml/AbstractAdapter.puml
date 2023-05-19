@@ -1,0 +1,76 @@
+@startuml
+abstract "AbstractMigration" as C_0001563994475587835458
+abstract C_0001563994475587835458 {
++~AbstractMigration() : void
+{abstract} +startMigration(QSqlDatabase connection) = 0 : void
+}
+class "UserMigration" as C_0002185853222220702641
+class C_0002185853222220702641 {
++startMigration(QSqlDatabase connection) : void
+}
+class "MigrationsIndex" as C_0001608885171007651355
+class C_0001608885171007651355 {
+{static} +setup(QSqlDatabase connection) : void
+}
+class "PasswordTools" as C_0001801756414020587948
+class C_0001801756414020587948 {
+{static} +genSalt(uint32_t size) : uint8_t *
+{static} +passwordHash(std::string password) : std::string
+{static} +passwordVerify(std::string passsword, std::string hash) : bool
+{static} +hash_len : const uint32_t
+{static} +salt_len : const uint32_t
+{static} +m_cost : const uint32_t
+{static} +t_cost : const uint32_t
+{static} +parallelism : const uint32_t
+}
+class "SharedObjects" as C_0000254919367871000869
+class C_0000254919367871000869 {
+{static} +setSettingsFilePath(std::string path) : void
+{static} +getPointer() : std::shared_ptr<SharedObjects>
++getSettings() : const QJsonObject
++getDatabase() : const QSqlDatabase
++~SharedObjects() : void
+#SharedObjects() : void
+#SharedObjects(const SharedObjects & ) : void
+#operator=(SharedObjects & ) : SharedObjects &
+#setupSettings() : void
+#setupDatabaseConnection() : void
+#settings : QJsonObject
+#dbConnection : QSqlDatabase
+{static} #self : std::shared_ptr<SharedObjects>
+{static} #settingsFilePath : std::string
+}
+class "AbstractProcessor" as C_0001826158902758542044
+class C_0001826158902758542044 {
+{static} +createResponse(int32_t code, QJsonObject * response = nullptr) : QByteArray
+}
+class "ClientCore" as C_0001793972203644769656
+class C_0001793972203644769656 {
++metaObject() const : const QMetaObject *
++qt_metacast(const char * ) : void *
++qt_metacall(QMetaObject::Call , int , void ** ) : int
+{static} +tr(const char * s, const char * c = nullptr, int n = -1) : QString
+{static} +trUtf8(const char * s, const char * c = nullptr, int n = -1) : QString
+{static} -qt_static_metacall(QObject * , QMetaObject::Call , int , void ** ) : void
++signalClientClose(quint64 id) : void
++ClientCore(QTcpSocket * connection, quint64 id) : void
++~ClientCore() : void
++getSocket() : QTcpSocket *
++getSocketId() : quint64
++setUserStatus(UserStatus value) : void
++getUserStatus() : UserStatus
++slotReadData() : void
++slotDisconnect() : void
+#state : int32_t
+#userStatus : UserStatus
+#socket : QTcpSocket *
+#socketId : quint64
+{static} +staticMetaObject : const QMetaObject
+{static} +REQUEST_MAX_SIZE : const int32_t
+}
+C_0001563994475587835458 <|-- C_0002185853222220702641
+C_0000254919367871000869 --> C_0000254919367871000869 : #self
+
+'Generated with clang-uml, version 0.3.5-17-gbca1162
+'LLVM version clang version 15.0.7
+@enduml

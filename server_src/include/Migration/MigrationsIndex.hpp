@@ -4,8 +4,8 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QDebug>
-#include "AbstractMigration.hpp"
-#include "UserMigration.hpp"
+#include "Migration/AbstractMigration.hpp"
+#include "Migration/UserMigration.hpp"
 
 class MigrationsIndex
 {

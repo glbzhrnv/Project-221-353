@@ -1,0 +1,80 @@
+[
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/server_autogen/mocs_compilation.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/mocs_compilation.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/server.dir/server_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/ClientCore.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/ClientCore.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/ClientCore.cpp",
+  "output": "CMakeFiles/server.dir/src/ClientCore.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Migration/AbstractMigration.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Migration/AbstractMigration.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Migration/AbstractMigration.cpp",
+  "output": "CMakeFiles/server.dir/src/Migration/AbstractMigration.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Migration/MigrationsIndex.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Migration/MigrationsIndex.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Migration/MigrationsIndex.cpp",
+  "output": "CMakeFiles/server.dir/src/Migration/MigrationsIndex.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Migration/UserMigration.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Migration/UserMigration.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Migration/UserMigration.cpp",
+  "output": "CMakeFiles/server.dir/src/Migration/UserMigration.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Model/UserModel.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Model/UserModel.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Model/UserModel.cpp",
+  "output": "CMakeFiles/server.dir/src/Model/UserModel.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Processor/AbstractProcessor.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Processor/AbstractProcessor.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Processor/AbstractProcessor.cpp",
+  "output": "CMakeFiles/server.dir/src/Processor/AbstractProcessor.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Processor/AuthUserProcessor.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Processor/AuthUserProcessor.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Processor/AuthUserProcessor.cpp",
+  "output": "CMakeFiles/server.dir/src/Processor/AuthUserProcessor.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Processor/CreateUserProcessor.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Processor/CreateUserProcessor.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Processor/CreateUserProcessor.cpp",
+  "output": "CMakeFiles/server.dir/src/Processor/CreateUserProcessor.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/ServerCore.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/ServerCore.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/ServerCore.cpp",
+  "output": "CMakeFiles/server.dir/src/ServerCore.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/SharedObjects.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/SharedObjects.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/SharedObjects.cpp",
+  "output": "CMakeFiles/server.dir/src/SharedObjects.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/Tools/PasswordTools.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/Tools/PasswordTools.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/Tools/PasswordTools.cpp",
+  "output": "CMakeFiles/server.dir/src/Tools/PasswordTools.cpp.o"
+},
+{
+  "directory": "/home/zen/Documents/dev/Project-221-353/server_src/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_SQL_LIB -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/zen/Documents/dev/Project-221-353/server_src/build -I/home/zen/Documents/dev/Project-221-353/server_src -I/home/zen/Documents/dev/Project-221-353/server_src/build/server_autogen/include -I/home/zen/Documents/dev/Project-221-353/server_src/include -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtCore -isystem /usr/lib64/qt5/mkspecs/linux-g++ -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtSql -fPIC -o CMakeFiles/server.dir/src/main.cpp.o -c /home/zen/Documents/dev/Project-221-353/server_src/src/main.cpp",
+  "file": "/home/zen/Documents/dev/Project-221-353/server_src/src/main.cpp",
+  "output": "CMakeFiles/server.dir/src/main.cpp.o"
+}
+]

@@ -17,13 +17,14 @@ RUN rm -rf /var/lib/apt/lists/*
 
 FROM core
 
-RUN mkdir -p /var/server/
+RUN mkdir -p /var/server/build
 
 COPY ./ /var/server/
-WORKDIR /var/server/
+WORKDIR /var/server/build/
 
 RUN ls -l
-RUN qmake server.pro
+RUN qmake ..
 RUN make -j
 
-ENTRYPOINT ["./server", "asd.json"]
+ENTRYPOINT ["./server", "./configuration.json"]
+

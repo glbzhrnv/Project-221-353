@@ -2,8 +2,10 @@ QT -= gui
 QT += core network sql
 
 CONFIG -= app_bundle
-CONFIG += c++21 console
+CONFIG += c++17 console
 #sanitizer sanitize_address
+
+QMAKE_CXXFLAGS += "-D_GLIBCXX_USE_CXX11_ABI=0"
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -23,6 +25,9 @@ LIBS += -largon2
 SOURCES += \
     src/ClientCore.cpp \
     src/Migration/AbstractMigration.cpp \
+    src/Migration/MigrationsIndex.cpp \
+    src/Migration/UserMigration.cpp \
+    src/Model/UserModel.cpp \
     src/Processor/AbstractProcessor.cpp \
     src/Processor/AuthUserProcessor.cpp \
     src/Processor/CreateUserProcessor.cpp \
