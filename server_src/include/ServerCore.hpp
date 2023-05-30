@@ -58,7 +58,7 @@ protected:
     /**
      * @brief Сокет сервера, к которому производятся подключения
      */
-    QTcpServer* mTcpServer;
+    QTcpServer *mTcpServer;
 
     /**
      * @brief Структура, хранящая в себе ссылки на все открыты клиентские сокеты

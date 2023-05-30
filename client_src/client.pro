@@ -19,28 +19,35 @@ SOURCES += \
     src/SharedObjects.cpp \
     src/Window/ClientCredentialsWindow.cpp \
     src/Window/NotificationWindow.cpp \
+    src/Window/StudentGetTaskWindow.cpp \
+    src/Window/StudentTaskWindow.cpp \
     src/Window/TeacherStatsWindow.cpp \
     src/main.cpp \
-    src/Window/MainWindow.cpp
 
 HEADERS += \
     src/Adapter/AbstractAdapter.hpp \
     src/Adapter/ConnectionStatusAdapter.hpp \
+    src/Enum/FSMType.hpp \
+    src/Enum/RequestMethod.hpp \
+    src/Enum/StatType.hpp \
     src/Model/UserStateModel.hpp \
     src/SharedObjects.hpp \
     src/Exception/AbstractRuntimeException.hpp \
     src/Exception/ConfigurationException.hpp \
     src/Exception/ConnectionException.hpp \
+    src/Transport.hpp \
     src/Window/ClientCredentialsWindow.hpp \
-    src/Window/MainWindow.hpp \
     src/Window/NotificationWindow.hpp \
+    src/Window/StudentGetTaskWindow.hpp \
+    src/Window/StudentTaskWindow.hpp \
     src/Window/TeacherStatsWindow.hpp
 
 FORMS += \
     src/Window/ClientCredentialsWindow.ui \
-    src/Window/MainWindow.ui \
     src/Window/NotificationWindow.ui \
-    src/Window/TeacherStatsWindow.ui
+    src/Window/TeacherStatsWindow.ui \
+    src/Window/StudentGetTaskWindow.ui \
+    src/Window/StudentTaskWindow.ui \
 
 CONFIG += ldebug
 CONFIG += embed_translations

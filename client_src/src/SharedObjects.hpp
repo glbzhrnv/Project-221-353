@@ -5,12 +5,14 @@
 #ifndef SHAREDOBJECTS_HPP
 #define SHAREDOBJECTS_HPP
 
-#include "Adapter/AbstractAdapter.hpp"
 #include <memory>
 #include <map>
-#include <QTcpSocket>
+#include <string>
 #include <QJsonObject>
 #include <QWidget>
+#include "Adapter/AbstractAdapter.hpp"
+#include "Model/UserStateModel.hpp"
+#include "Transport.hpp"
 
 /**
  * @brief Хранилище разделённых объектов сервера
@@ -47,9 +49,11 @@ public:
 
     /**
      * @brief Возвращает экземпляр сокета
-     * @return QTcpSocket Экземпляр сокета
+     * @return Transport Экземпляр сокета
      */
-    std::shared_ptr<QTcpSocket> getSocket();
+    Transport* getTransport();
+
+    UserStateModel* getUserState();
 
     uint64_t windowIdGet(uint32_t name, uint32_t copy);
 
@@ -59,7 +63,17 @@ public:
 
     void windowSet(QWidget* window, uint32_t name, uint32_t copy = 0);
 
-    std::shared_ptr<QWidget> windowGet(uint32_t name, uint32_t copy = 0);
+    template <class T = QWidget>
+    std::shared_ptr<T> windowGet(uint32_t name, uint32_t copy = 0)
+    {
+        uint64_t windowId = windowIdGet(name, copy);
+
+        if (!windowExists(windowId)) {
+            return nullptr;
+        }
+
+        return std::static_pointer_cast<T>(windowsHeap[windowId]);
+    }
 
     void adapterAdd(AbstractAdapter*);
 
@@ -67,12 +81,12 @@ protected:
     /**
      * @brief Узакатель на общий экзмпляр класса
      */
-    static std::shared_ptr<SharedObjects> self;
+    inline static std::shared_ptr<SharedObjects> self;
 
     /**
      * @brief Путь до конфигурации
      */
-    static std::string settingsFilePath;
+    inline static std::string settingsFilePath;
 
     /**
      * @brief Объект, содержащий параметры конфигурации
@@ -82,11 +96,13 @@ protected:
     /**
      * @brief Экземпляр сокета
      */
-    std::shared_ptr<QTcpSocket> socket;
+    Transport socket;
 
-    std::map<uint64_t, std::shared_ptr<QWidget>>* windowsHeap;
+    std::map<uint64_t, std::shared_ptr<QWidget>> windowsHeap;
 
-    std::vector<std::unique_ptr<AbstractAdapter>>* adaptersHeap;
+    std::vector<std::unique_ptr<AbstractAdapter>> adaptersHeap;
+
+    UserStateModel userState;
 
     /**
      * @brief Защищённый конструктор

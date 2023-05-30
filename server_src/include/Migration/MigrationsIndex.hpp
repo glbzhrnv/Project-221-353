@@ -12,12 +12,12 @@ class MigrationsIndex
 public:
     static void setup(QSqlDatabase connection)
     {
-        AbstractMigration* list[] = {
+        AbstractMigration *list[] = {
             new UserMigration(),
         };
 
         QSqlError error;
-        for (AbstractMigration* ptr: list) {
+        for (AbstractMigration *ptr: list) {
             ptr->startMigration(connection);
             delete ptr;
 

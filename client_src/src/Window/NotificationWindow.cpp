@@ -22,5 +22,5 @@ void NotificationWindow::on_Confirm_clicked()
 
 void NotificationWindow::updateText(std::string text)
 {
-    ui->Text->setText(text.c_str());
+//    ui->Text->setText(text.c_str());
 }

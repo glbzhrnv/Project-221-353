@@ -8,13 +8,7 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QTcpSocket>
-
-/// Возможные состояния пользователя
-enum UserStatus: int32_t
-{
-    NO_AUTH = 0, //< Не авторизован
-    LOGGED_IN = 1, //< Обычный пользователь
-};
+#include "Model/UserStateModel.hpp"
 
 /**
  * @brief Хранилище соединения клиента
@@ -33,7 +27,7 @@ signals:
 public:
     inline static constexpr int32_t REQUEST_MAX_SIZE = 16384;
 
-    explicit ClientCore(QTcpSocket* connection, quint64 id);
+    explicit ClientCore(QTcpSocket *connection, quint64 id);
 
     ~ClientCore();
 
@@ -49,9 +43,7 @@ public:
      */
     quint64 getSocketId();
 
-    void setUserStatus(UserStatus value);
-
-    UserStatus getUserStatus();
+    Model::UserStateModel* userStateGet();
 
 public slots:
     /**
@@ -73,15 +65,12 @@ protected:
      */
     int32_t state = 0;
 
-    /**
-     * Текущий статус пользователя
-     */
-    UserStatus userStatus = UserStatus::NO_AUTH;
+    Model::UserStateModel userState;
 
     /**
      * @brief Указатель на пользовательский сокет
      */
-    QTcpSocket* socket;
+    QTcpSocket *socket;
 
     /**
      * @brief Идентификатор сокета

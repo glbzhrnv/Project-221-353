@@ -20,13 +20,13 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tasks">
+      <widget class="QWidget" name="Tasks">
        <attribute name="title">
         <string>Задания</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableWidget" name="tableWidget_2">
+         <widget class="QTableWidget" name="TasksTable">
           <column>
            <property name="text">
             <string>ID</string>
@@ -127,14 +127,7 @@
     </property>
     <addaction name="action"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
-    <property name="title">
-     <string>Задания</string>
-    </property>
-    <addaction name="action_2"/>
-   </widget>
    <addaction name="menu"/>
-   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">

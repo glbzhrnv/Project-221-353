@@ -14,7 +14,7 @@ class ClientCredentialsWindow: public QDialog
     Q_OBJECT
 
 public:
-    static const uint32_t WINDOW_ID = 1;
+    static const uint32_t WINDOW_ID = 0;
 
     ClientCredentialsWindow(QWidget *parent = nullptr);
     ~ClientCredentialsWindow();

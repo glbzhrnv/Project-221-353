@@ -1,23 +1,21 @@
 #include <QFile>
 #include <QFileInfo>
-#include <QIODevice>
+//#include <QIODevice>
 #include <QJsonDocument>
 #include <memory>
 #include "Adapter/AbstractAdapter.hpp"
 #include "Exception/ConfigurationException.hpp"
 #include "Window/NotificationWindow.hpp"
 #include "SharedObjects.hpp"
+#include "Transport.hpp"
 
 SharedObjects::SharedObjects()
-    : socket(std::shared_ptr<QTcpSocket>(new QTcpSocket()))
-    , windowsHeap(new std::map<uint64_t, std::shared_ptr<QWidget>>)
-    , adaptersHeap(new std::vector<std::unique_ptr<AbstractAdapter>>)
 {
     setupSettings();
 
     windowSet(new NotificationWindow, NotificationWindow::WINDOW_ID);
 
-    socket->connectToHost("127.0.0.1", 33333);
+    userState.setSocket(socket.getSocket());
 }
 
 SharedObjects::~SharedObjects()
@@ -27,26 +25,27 @@ SharedObjects::~SharedObjects()
 void SharedObjects::setSettingsFilePath(std::string path)
 {
     settingsFilePath = path;
-
-    if (self == nullptr) {
-        self->setupSettings();
-    }
 }
 
 std::shared_ptr<SharedObjects> SharedObjects::getPointer()
 {
-    if (self == nullptr) {
+    if (!self) {
         self = std::shared_ptr<SharedObjects>(
-            new SharedObjects()
+            new SharedObjects
         );
     }
 
     return self;
 }
 
-std::shared_ptr<QTcpSocket> SharedObjects::getSocket()
+Transport* SharedObjects::getTransport()
 {
-    return socket;
+    return &socket;
+}
+
+UserStateModel* SharedObjects::getUserState()
+{
+    return &userState;
 }
 
 uint64_t SharedObjects::windowIdGet(uint32_t name, uint32_t copy)
@@ -61,30 +60,19 @@ bool SharedObjects::windowExists(uint32_t name, uint32_t copy)
 
 bool SharedObjects::windowExists(uint64_t windowId)
 {
-    return windowsHeap->count(windowId) == 0;
+    return windowsHeap.count(windowId) == 0;
 }
 
 void SharedObjects::windowSet(QWidget* window, uint32_t name, uint32_t copy)
 {
     uint64_t windowId = windowIdGet(name, copy);
 
-    (*windowsHeap)[windowId] = std::shared_ptr<QWidget>(window);
-}
-
-std::shared_ptr<QWidget> SharedObjects::windowGet(uint32_t name, uint32_t copy)
-{
-    uint64_t windowId = windowIdGet(name, copy);
-
-    if (!windowExists(windowId)) {
-        return nullptr;
-    }
-
-    return (*windowsHeap)[windowId];
+    windowsHeap[windowId] = std::shared_ptr<QWidget>(window);
 }
 
 void SharedObjects::adapterAdd(AbstractAdapter* adapter)
 {
-    adaptersHeap->push_back(std::unique_ptr<AbstractAdapter>(adapter));
+    adaptersHeap.push_back(std::unique_ptr<AbstractAdapter>(adapter));
 }
 
 void SharedObjects::setupSettings()

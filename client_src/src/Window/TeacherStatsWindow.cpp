@@ -12,3 +12,8 @@ TeacherStatsWindow::~TeacherStatsWindow()
 {
     delete ui;
 }
+
+void TeacherStatsWindow::updateStats(QJsonObject data)
+{
+
+}

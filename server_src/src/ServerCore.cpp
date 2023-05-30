@@ -50,6 +50,8 @@ void ServerCore::slotAddConnection()
         this, &ServerCore::slotDeleteConnection
     );
 
+    clientData->getSocket()->write("\r\n");
+
     clientsMap[socketId] = std::move(clientData);
 
     qDebug("Client connected");

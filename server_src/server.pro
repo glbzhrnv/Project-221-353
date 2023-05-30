@@ -27,12 +27,17 @@ SOURCES += \
     src/Migration/AbstractMigration.cpp \
     src/Migration/MigrationsIndex.cpp \
     src/Migration/UserMigration.cpp \
+    src/Model/TaskModel.cpp \
     src/Model/UserModel.cpp \
+    src/Model/UserStateModel.cpp \
     src/Processor/AbstractProcessor.cpp \
     src/Processor/AuthUserProcessor.cpp \
     src/Processor/CreateUserProcessor.cpp \
+    src/Processor/GetTaskProcessor.cpp \
+    src/Processor/SendTaskProcessor.cpp \
     src/SharedObjects.cpp \
     src/Tools/PasswordTools.cpp \
+    src/Tools/TaskTools.cpp \
         src/main.cpp \
         src/ServerCore.cpp \
 
@@ -43,18 +48,29 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     include/ClientCore.hpp \
+    include/Enum/FSMTypeEnum.hpp \
+    include/Enum/RequestMethod.hpp \
+    include/Enum/UserAuthStateEnum.hpp \
     include/Exception/AbstractRuntimeException.hpp \
     include/Exception/ConfigurationException.hpp \
     include/Exception/ConnectionException.hpp \
     include/Migration/AbstractMigration.hpp \
     include/Migration/MigrationsIndex.hpp \
+    include/Migration/TaskMigration.hpp \
     include/Migration/UserMigration.hpp \
+    include/Model/AbstractModel.hpp \
+    include/Model/TaskModel.hpp \
+    include/Model/UserModel.hpp \
+    include/Model/UserStateModel.hpp \
     include/Processor/AbstractProcessor.hpp \
     include/Processor/AuthUserProcessor.hpp \
     include/Processor/CreateUserProcessor.hpp \
+    include/Processor/GetTaskProcessor.hpp \
+    include/Processor/SendTaskProcessor.hpp \
     include/ServerCore.hpp \
     include/SharedObjects.hpp \
-    include/Tools/PasswordTools.hpp
+    include/Tools/PasswordTools.hpp \
+    include/Tools/TaskTools.hpp
 
 DISTFILES += \
     Dockerfile \

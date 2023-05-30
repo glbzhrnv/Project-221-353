@@ -1,32 +1,53 @@
-#include <regex>
-#include <argon2.h>
-#include <iostream>
+#include "Enum/UserAuthStateEnum.hpp"
 #include "Model/UserModel.hpp"
+#include "Model/UserStateModel.hpp"
 #include "Processor/CreateUserProcessor.hpp"
 
-QByteArray CreateUser::Processor::process(QJsonObject params, ClientCore* client)
+CreateUserProcessor::CreateUserProcessor()
 {
-    if (client->getUserStatus() != UserStatus::NO_AUTH) {
-        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::ALREADY_LOGGED_IN);
+    loginRegex = new std::regex(Model::UserModel::LOGIN_REGEX);
+    passwordRegex = new std::regex(Model::UserModel::PASSWORD_REGEX);
+}
+
+CreateUserProcessor::~CreateUserProcessor()
+{
+    delete loginRegex;
+    delete passwordRegex;
+}
+
+QByteArray CreateUserProcessor::process(QJsonObject params, ClientCore *client)
+{
+    Model::UserStateModel *userState = client->userStateGet();
+
+    if (userState->authStatusGet() != ENUM::NO_AUTH) {
+        return createResponse(ResponseCode::ALREADY_LOGGED_IN);
     }
 
     std::string login = params["login"].toString().toStdString();
-    std::regex loginRE(Model::UserModel::LOGIN_REGEX);
-    if (!std::regex_match(login, loginRE)) {
-        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::INVALID_LOGIN);
+    if (!std::regex_match(login, *loginRegex)) {
+        return createResponse(ResponseCode::INVALID_LOGIN);
     }
 
     std::string password = params["password"].toString().toStdString();
-    std::regex passwordRE(Model::UserModel::PASSWORD_REGEX);
-    if (!std::regex_match(password, passwordRE)) {
-        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::INVALID_PASSWORD);
+    if (!std::regex_match(password, *passwordRegex)) {
+        return createResponse(ResponseCode::INVALID_PASSWORD);
     }
 
     if (Model::UserModel::isExists(login)) {
-        return CreateUser::Processor::createResponse(CreateUser::ResponseCode::LOGIN_ALREADY_TAKEN);
+        return createResponse(ResponseCode::LOGIN_ALREADY_TAKEN);
     }
 
-    Model::UserModel::create(login, password);
+    Model::UserModel::userData data = Model::UserModel::create(login, password);
 
-    return CreateUser::Processor::createResponse(CreateUser::ResponseCode::SUCCESS);
+    userState->tokenCreate();
+    userState->dataSet(data);
+
+    QJsonObject response = {
+        {"login", data.login.c_str()},
+        {"password", data.password.c_str()},
+        {"is_teacher", data.is_teacher},
+        {"token", userState->tokenGet().c_str()}
+    };
+
+    return createResponse(ResponseCode::SUCCESS, &response);
 }

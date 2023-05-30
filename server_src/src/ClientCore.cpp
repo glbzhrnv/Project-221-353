@@ -4,8 +4,9 @@
 #include "Processor/AuthUserProcessor.hpp"
 #include "Processor/CreateUserProcessor.hpp"
 #include "ClientCore.hpp"
+#include "Processor/GetTaskProcessor.hpp"
 
-ClientCore::ClientCore(QTcpSocket* socket, quint64 socketId): socket(socket), socketId(socketId)
+ClientCore::ClientCore(QTcpSocket *socket, quint64 socketId): socket(socket), socketId(socketId)
 {
 //    this->socket = std::make_shared<QTcpSocket>(socket);
 
@@ -34,6 +35,11 @@ QTcpSocket* ClientCore::getSocket()
 quint64 ClientCore::getSocketId()
 {
     return socketId;
+}
+
+Model::UserStateModel* ClientCore::userStateGet()
+{
+    return &userState;
 }
 
 void ClientCore::slotReadData()
@@ -65,26 +71,18 @@ void ClientCore::slotReadData()
             params = requestObject["params"].toObject();
 
         switch (requestObject["method"].toInt()) {
-            case CreateUser::METHOD_ID:
-                result = CreateUser::Processor::process(params, this);
+            case CreateUserProcessor::METHOD_ID:
+                CreateUserProcessor().process(params, this);
                 break;
-            case AuthUser::METHOD_ID:
-                result = AuthUser::Processor::process(params, this);
+            case AuthUserProcessor::METHOD_ID:
+                CreateUserProcessor().process(params, this);
+                break;
+            case GetTaskProcessor::METHOD_ID:
                 break;
         }
     }
 
     socket->write(result);
-}
-
-void ClientCore::setUserStatus(UserStatus value)
-{
-    userStatus = value;
-}
-
-UserStatus ClientCore::getUserStatus()
-{
-    return userStatus;
 }
 
 void ClientCore::slotDisconnect()

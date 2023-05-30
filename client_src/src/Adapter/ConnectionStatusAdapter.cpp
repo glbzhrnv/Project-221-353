@@ -1,22 +1,22 @@
 #include <QApplication>
 #include "Adapter/ConnectionStatusAdapter.hpp"
 #include "Window/NotificationWindow.hpp"
-#include "SharedObjects.cpp"
+#include "SharedObjects.hpp"
 
 ConnectionStatusAdapter::ConnectionStatusAdapter(QWidget *parent)
     : AbstractAdapter(parent)
     , window(new NotificationWindow(parent))
 {
-    std::shared_ptr<QTcpSocket> socket = SharedObjects::getPointer()
-        ->getSocket();
+    Transport* socket = SharedObjects::getPointer()
+        ->getTransport();
 
     connect(
-        socket.get(), &QTcpSocket::errorOccurred,
+        socket->getSocket(), &QTcpSocket::errorOccurred,
         this, &ConnectionStatusAdapter::connectionError
     );
 
     connect(
-        socket.get(), &QTcpSocket::connected,
+        socket->getSocket(), &QTcpSocket::connected,
         this, &ConnectionStatusAdapter::connected
     );
 }
@@ -27,7 +27,7 @@ ConnectionStatusAdapter::~ConnectionStatusAdapter()
 }
 
 void ConnectionStatusAdapter::connectionError(
-        QAbstractSocket::SocketError socketError
+    QAbstractSocket::SocketError socketError
 ) {
     window->updateText("Unable to connect to the server");
     window->show();

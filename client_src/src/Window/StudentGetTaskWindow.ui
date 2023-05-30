@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StudentGetTaskWindow</class>
+ <widget class="QWidget" name="StudentGetTaskWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>240</width>
+    <height>240</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>240</width>
+    <height>240</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="GetMealyMachine">
+     <property name="text">
+      <string>Хочу автомат Мили</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="GetMooreMachine">
+     <property name="text">
+      <string>Хочу автомат Мура</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="Stats">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

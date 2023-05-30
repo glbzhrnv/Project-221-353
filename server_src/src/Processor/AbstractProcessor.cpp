@@ -1,11 +1,21 @@
+#include <string>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDateTime>
 #include "Processor/AbstractProcessor.hpp"
 
+AbstractProcessor::AbstractProcessor()
+{
+}
+
+AbstractProcessor::~AbstractProcessor()
+{
+}
+
 QByteArray AbstractProcessor::createResponse(
     int32_t code,
-    QJsonObject* response
+    QJsonObject *response,
+    std::string text
 ) {
     QJsonObject midResponse;
     if (response != nullptr) {
@@ -14,9 +24,15 @@ QByteArray AbstractProcessor::createResponse(
 
     QJsonObject result = {
         {"code", code},
+        {"text", text.c_str()},
         {"response", midResponse},
         {"stamp", QDateTime::currentSecsSinceEpoch()}
     };
 
     return QJsonDocument(result).toJson();
+}
+
+QByteArray AbstractProcessor::process(QJsonObject params, ClientCore *client)
+{
+    return "{\"code\":-1}";
 }

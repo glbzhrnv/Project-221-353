@@ -13,7 +13,7 @@ class NotificationWindow : public QDialog
     Q_OBJECT
 
 public:
-    static const uint32_t WINDOW_ID = 0;
+    static const uint32_t WINDOW_ID = 1;
 
     NotificationWindow(QWidget *parent = nullptr);
     ~NotificationWindow();
