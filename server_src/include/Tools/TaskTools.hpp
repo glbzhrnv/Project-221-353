@@ -2,25 +2,13 @@
 #define TASKTOOLS_HPP
 
 #include <QJsonObject>
+#include "Model/TaskModel.hpp"
 #include "Enum/FSMTypeEnum.hpp"
-#include "Model/UserModel.hpp"
-
-struct taskData {
-    int32_t id;
-    ENUM::FSMTypeEnum type;
-    std::string data;
-    std::string solution;
-    bool is_solved;
-};
 
 class TaskTools
 {
 public:
-    static taskData taskCreate(ENUM::FSMTypeEnum type);
-
-    static bool taskSolve(taskData &data, bool resolve = false);
-
-    static bool taskCheckSolution(taskData &task, Model::UserModel::userData *data = nullptr);
+    static taskData create(ENUM::FSMTypeEnum type);
 };
 
 #endif // TASKTOOLS_HPP

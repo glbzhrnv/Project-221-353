@@ -96,7 +96,7 @@ protected:
     /**
      * @brief Экземпляр сокета
      */
-    Transport socket;
+    Transport transport;
 
     std::map<uint64_t, std::shared_ptr<QWidget>> windowsHeap;
 

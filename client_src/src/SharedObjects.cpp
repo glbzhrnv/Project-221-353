@@ -5,7 +5,6 @@
 #include <memory>
 #include "Adapter/AbstractAdapter.hpp"
 #include "Exception/ConfigurationException.hpp"
-#include "Window/NotificationWindow.hpp"
 #include "SharedObjects.hpp"
 #include "Transport.hpp"
 
@@ -13,9 +12,7 @@ SharedObjects::SharedObjects()
 {
     setupSettings();
 
-    windowSet(new NotificationWindow, NotificationWindow::WINDOW_ID);
-
-    userState.setSocket(socket.getSocket());
+    userState.setTransport(&transport);
 }
 
 SharedObjects::~SharedObjects()
@@ -40,7 +37,7 @@ std::shared_ptr<SharedObjects> SharedObjects::getPointer()
 
 Transport* SharedObjects::getTransport()
 {
-    return &socket;
+    return &transport;
 }
 
 UserStateModel* SharedObjects::getUserState()

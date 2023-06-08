@@ -29,7 +29,7 @@ QByteArray AbstractProcessor::createResponse(
         {"stamp", QDateTime::currentSecsSinceEpoch()}
     };
 
-    return QJsonDocument(result).toJson();
+    return QJsonDocument(result).toJson(QJsonDocument::Compact);
 }
 
 QByteArray AbstractProcessor::process(QJsonObject params, ClientCore *client)

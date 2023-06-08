@@ -1,36 +1,42 @@
 #include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QDateTime>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include "Enum/FSMTypeEnum.hpp"
+#include "Model/TaskModel.hpp"
+#include "Task/MealySolve.hpp"
+#include "Task/MealySuperposition.hpp"
+#include "Task/MooreSolve.hpp"
+#include "Task/MooreSuperposition.hpp"
 #include "Tools/TaskTools.hpp"
-#include "Model/UserModel.hpp"
-#include "SharedObjects.hpp"
 
-taskData TaskTools::taskCreate(ENUM::FSMTypeEnum type)
+taskData TaskTools::create(ENUM::FSMTypeEnum type)
 {
+    QJsonObject data;
+    std::string request = "01010101";
+    std::string solution;
+
+    switch (type) {
+        case ENUM::MEALY_SOLVE:
+            data = MealySolve::gen(request, solution);
+            break;
+        case ENUM::MEALY_SUPER:
+            data = MealySuperposition::gen(request, solution);
+            break;
+        case ENUM::MEALY_TO_MOORE:
+            break;
+        case ENUM::MOORE_SOLVE:
+            data = MooreSolve::gen(request, solution);
+            break;
+        case ENUM::MOORE_SUPER:
+            data = MooreSuperposition::gen(request, solution);
+            break;
+    }
+
     return {
         .id = 0,
         .type = type,
-        .data = "",
-        .solution = "",
+        .data = QJsonDocument(data).toJson(QJsonDocument::Compact).toStdString(),
+        .solution = solution,
         .is_solved = true
     };
-}
-
-bool TaskTools::taskSolve(taskData &task, bool resolve)
-{
-    if (!resolve && task.is_solved) {
-        return true;
-    }
-
-    task.solution = "";
-    task.is_solved = true;
-
-    return true;
-}
-
-bool TaskTools::taskCheckSolution(taskData &task, Model::UserModel::userData *data)
-{
-    if (data != nullptr) {
-
-    }
 }

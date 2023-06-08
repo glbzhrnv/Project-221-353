@@ -4,7 +4,6 @@
 #include <QAbstractSocket>
 #include "Adapter/AbstractAdapter.hpp"
 #include "Window/NotificationWindow.hpp"
-#include "SharedObjects.hpp"
 
 class ConnectionStatusAdapter: public AbstractAdapter
 {

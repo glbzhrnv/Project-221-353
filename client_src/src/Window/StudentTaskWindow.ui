@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="Content">
      <property name="text">
-      <string/>
+      <string>asd</string>
      </property>
     </widget>
    </item>

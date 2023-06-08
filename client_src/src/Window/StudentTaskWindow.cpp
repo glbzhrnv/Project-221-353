@@ -1,7 +1,7 @@
 #include <string>
 #include <memory>
+#include <QMessageBox>
 #include "Model/UserStateModel.hpp"
-#include "Window/NotificationWindow.hpp"
 #include "Window/StudentTaskWindow.hpp"
 #include "ui_StudentTaskWindow.h"
 #include "SharedObjects.hpp"
@@ -11,6 +11,8 @@ StudentTaskWindow::StudentTaskWindow(QWidget *parent)
     , ui(new Ui::StudentTaskWindow)
 {
     ui->setupUi(this);
+
+    ptr = SharedObjects::getPointer();
 }
 
 StudentTaskWindow::~StudentTaskWindow()
@@ -20,7 +22,7 @@ StudentTaskWindow::~StudentTaskWindow()
 
 void StudentTaskWindow::setTask(QJsonObject params)
 {
-    taskId = params["task_id"].toInt();
+    taskId = params["id"].toInt();
     ui->Content->setText(params["data"].toString());
 }
 
@@ -31,11 +33,6 @@ void StudentTaskWindow::on_Send_clicked()
 //        return;
 //    }
 
-    std::shared_ptr<SharedObjects> ptr = SharedObjects::getPointer();
-    std::shared_ptr<NotificationWindow> window = ptr->windowGet<NotificationWindow>(
-        NotificationWindow::WINDOW_ID
-    );
-
     QJsonObject result = ptr->getUserState()->sendTask(taskId, answer);
 
     std::string message;
@@ -45,8 +42,7 @@ void StudentTaskWindow::on_Send_clicked()
         message = "Ответ неверный";
     }
 
-    window->updateText(message);
-    window->show();
-
     this->hide();
+
+    QMessageBox::information(this, "Login", message.c_str());
 }

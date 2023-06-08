@@ -8,8 +8,8 @@ namespace ENUM
 
 enum StatType: int32_t
 {
-    USER = 1,
-    TEACHER = 2,
+    USER = 0,
+    TEACHER = 1,
 };
 
 }

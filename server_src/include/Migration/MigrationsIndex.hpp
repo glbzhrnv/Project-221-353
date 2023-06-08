@@ -5,7 +5,9 @@
 #include <QSqlError>
 #include <QDebug>
 #include "Migration/AbstractMigration.hpp"
+#include "Migration/TaskMigration.hpp"
 #include "Migration/UserMigration.hpp"
+#include "Migration/StatMigration.hpp"
 
 class MigrationsIndex
 {
@@ -13,7 +15,9 @@ public:
     static void setup(QSqlDatabase connection)
     {
         AbstractMigration *list[] = {
+            new TaskMigration(),
             new UserMigration(),
+            new StatMigration(),
         };
 
         QSqlError error;

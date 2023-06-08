@@ -15,6 +15,7 @@ INCLUDEPATH += $$PWD/src/
 SOURCES += \
     src/Adapter/AbstractAdapter.cpp \
     src/Adapter/ConnectionStatusAdapter.cpp \
+    src/Model/StatModel.cpp \
     src/Model/UserStateModel.cpp \
     src/SharedObjects.cpp \
     src/Window/ClientCredentialsWindow.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     src/Enum/FSMType.hpp \
     src/Enum/RequestMethod.hpp \
     src/Enum/StatType.hpp \
+    src/Model/StatModel.hpp \
     src/Model/UserStateModel.hpp \
     src/SharedObjects.hpp \
     src/Exception/AbstractRuntimeException.hpp \

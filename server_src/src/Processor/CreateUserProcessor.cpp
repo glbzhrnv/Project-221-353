@@ -41,6 +41,7 @@ QByteArray CreateUserProcessor::process(QJsonObject params, ClientCore *client)
 
     userState->tokenCreate();
     userState->dataSet(data);
+    userState->authStatusSet(ENUM::LOGGED_IN);
 
     QJsonObject response = {
         {"login", data.login.c_str()},

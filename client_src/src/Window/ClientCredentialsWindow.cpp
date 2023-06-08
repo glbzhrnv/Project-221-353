@@ -6,7 +6,6 @@
 #include "ClientCredentialsWindow.hpp"
 #include "ui_ClientCredentialsWindow.h"
 #include "Model/UserStateModel.hpp"
-#include "Window/NotificationWindow.hpp"
 #include "Window/StudentGetTaskWindow.hpp"
 #include "Window/TeacherStatsWindow.hpp"
 #include "SharedObjects.hpp"
@@ -17,6 +16,8 @@ ClientCredentialsWindow::ClientCredentialsWindow(QWidget *parent)
     , ui(new Ui::ClientCredentialsWindow)
 {
     ui->setupUi(this);
+
+    ptr = SharedObjects::getPointer();
 
     Transport *socket = SharedObjects::getPointer()
         ->getTransport();
@@ -34,43 +35,20 @@ ClientCredentialsWindow::~ClientCredentialsWindow()
 
 void ClientCredentialsWindow::on_Login_clicked()
 {
-    std::shared_ptr<SharedObjects> ptr = SharedObjects::getPointer();
-
-    UserStateModel *user = ptr->getUserState();
-
-    std::shared_ptr<NotificationWindow> notification = ptr->windowGet<NotificationWindow>(
-        NotificationWindow::WINDOW_ID
+    QJsonObject response = ptr->getUserState()->login(
+        ui->AuthEmail->text().toStdString(),
+        ui->AuthPassword->text().toStdString()
     );
 
-
-
-    std::string login = ui->AuthEmail->text().toStdString();
-    std::string password = ui->AuthPassword->text().toStdString();
-
-    QJsonObject response = user->login(login, password);
-
-    if (response["code"] != 0) {
-        notification->updateText("Invalid login or password");
+    if (response["code"].toInt(-1) != 0) {
+        QMessageBox::information(this, "Login", "Invalid login or password");
 
         return;
     }
 
-    QJsonObject result = response["result"].toObject();
-
-    QWidget *window;
-    int32_t windowId;
-    if (result["is_teacher"].toBool()) {
-        window = new TeacherStatsWindow;
-        windowId = TeacherStatsWindow::WINDOW_ID;
-    } else {
-        window = new StudentGetTaskWindow;
-        windowId = StudentGetTaskWindow::WINDOW_ID;
-    }
-
-    ptr->windowSet(window, windowId);
-    window->show();
-
-    this->hide();
+    setupNextWindow(
+        response["response"].toObject()
+    );
 }
 
 void ClientCredentialsWindow::on_Register_clicked()
@@ -88,7 +66,34 @@ void ClientCredentialsWindow::on_Register_clicked()
         ui->RegPassword->text().toStdString()
     );
 
-    if (response["code"].toInt() != 0) {
-        QMessageBox::information(this, "Reg", "Unable to register");
+    if (response["code"].toInt(-1) != 0) {
+        QMessageBox::information(this, "Registration", "Unable to register");
+
+        return;
     }
+
+    setupNextWindow(
+        response["response"].toObject()
+    );
+    //Aiyohg6a
+}
+
+void ClientCredentialsWindow::setupNextWindow(QJsonObject value)
+{
+    qDebug() << value["is_teacher"].toBool(false);
+
+    QWidget *window;
+    int32_t windowId;
+    if (value["is_teacher"].toBool(false)) {
+        window = new TeacherStatsWindow;
+        windowId = TeacherStatsWindow::WINDOW_ID;
+    } else {
+        window = new StudentGetTaskWindow;
+        windowId = StudentGetTaskWindow::WINDOW_ID;
+    }
+
+    ptr->windowSet(window, windowId);
+    window->show();
+
+    this->hide();
 }

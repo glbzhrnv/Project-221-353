@@ -27,12 +27,14 @@ SOURCES += \
     src/Migration/AbstractMigration.cpp \
     src/Migration/MigrationsIndex.cpp \
     src/Migration/UserMigration.cpp \
+    src/Model/StatModel.cpp \
     src/Model/TaskModel.cpp \
     src/Model/UserModel.cpp \
     src/Model/UserStateModel.cpp \
     src/Processor/AbstractProcessor.cpp \
     src/Processor/AuthUserProcessor.cpp \
     src/Processor/CreateUserProcessor.cpp \
+    src/Processor/GetStatProcessor.cpp \
     src/Processor/GetTaskProcessor.cpp \
     src/Processor/SendTaskProcessor.cpp \
     src/SharedObjects.cpp \
@@ -50,25 +52,41 @@ HEADERS += \
     include/ClientCore.hpp \
     include/Enum/FSMTypeEnum.hpp \
     include/Enum/RequestMethod.hpp \
+    include/Enum/StatType.hpp \
     include/Enum/UserAuthStateEnum.hpp \
     include/Exception/AbstractRuntimeException.hpp \
     include/Exception/ConfigurationException.hpp \
     include/Exception/ConnectionException.hpp \
     include/Migration/AbstractMigration.hpp \
     include/Migration/MigrationsIndex.hpp \
+    include/Migration/StatMigration.hpp \
     include/Migration/TaskMigration.hpp \
     include/Migration/UserMigration.hpp \
-    include/Model/AbstractModel.hpp \
+    include/Model/StatModel.hpp \
     include/Model/TaskModel.hpp \
     include/Model/UserModel.hpp \
     include/Model/UserStateModel.hpp \
     include/Processor/AbstractProcessor.hpp \
     include/Processor/AuthUserProcessor.hpp \
     include/Processor/CreateUserProcessor.hpp \
+    include/Processor/GetStatProcessor.hpp \
     include/Processor/GetTaskProcessor.hpp \
     include/Processor/SendTaskProcessor.hpp \
     include/ServerCore.hpp \
     include/SharedObjects.hpp \
+    include/Task/MachineSolver.hpp \
+    include/Task/MachineState.hpp \
+    include/Task/MealyGen.hpp \
+    include/Task/MealySolve.hpp \
+    include/Task/MealyState.hpp \
+    include/Task/MealySuperposition.hpp \
+    include/Task/MealyToMoore.hpp \
+    include/Task/MooreGen.hpp \
+    include/Task/MooreSolve.hpp \
+    include/Task/MooreState.hpp \
+    include/Task/MooreSuperposition.hpp \
+    include/Task/SuperState.hpp \
+    include/Task/SuperpositionMoore.hpp \
     include/Tools/PasswordTools.hpp \
     include/Tools/TaskTools.hpp
 

@@ -1,3 +1,4 @@
+#include <QSqlDatabase>
 #include <QSqlQuery>
 #include "Model/UserModel.hpp"
 #include "Tools/PasswordTools.hpp"
@@ -46,7 +47,7 @@ bool Model::UserModel::extract(std::string login, userData &data)
     QSqlDatabase connection = SharedObjects::getPointer()->getDatabase();
 
     QSqlQuery query(connection);
-    query.prepare("SELECT `login`, `password`, `is_teacher` FROM `User` WHERE `login` = :login");
+    query.prepare("SELECT `id`, `login`, `password`, `is_teacher` FROM `User` WHERE `login` = :login");
     query.bindValue(":login", login.c_str());
     query.exec();
 

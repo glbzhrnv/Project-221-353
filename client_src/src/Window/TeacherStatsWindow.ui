@@ -15,82 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="2" column="0">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="Tasks">
-       <attribute name="title">
-        <string>Задания</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QTableWidget" name="TasksTable">
-          <column>
-           <property name="text">
-            <string>ID</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Название</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Содержимое</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Решение</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Статистика</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget">
-          <attribute name="horizontalHeaderVisible">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>Номер группы</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Средняя оценка</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
     <item row="1" column="0">
      <widget class="QFrame" name="frame">
       <property name="frameShape">
@@ -108,6 +32,46 @@
         </widget>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QTableWidget" name="TasksTable">
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <column>
+       <property name="text">
+        <string>Логин</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Задание №1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Задание №2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Задание №3</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Задание №4</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Задание №5</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>

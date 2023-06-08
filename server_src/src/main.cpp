@@ -1,5 +1,4 @@
 #include <QCoreApplication>
-#include <QDebug>
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>

@@ -1,9 +1,11 @@
 #ifndef TEACHERSTATSWINDOW_H
 #define MAINWINDOW_H
 
+#include <memory>
 #include <QMainWindow>
 #include <QWidget>
 #include <QJsonObject>
+#include "SharedObjects.hpp"
 
 namespace Ui
 {
@@ -25,6 +27,10 @@ public:
 
 private:
     Ui::TeacherStatsWindow *ui;
+
+    std::shared_ptr<SharedObjects> ptr;
+
+    uint32_t currentLastRow = 0;
 };
 
 #endif // TEACHERSTATSWINDOW_H

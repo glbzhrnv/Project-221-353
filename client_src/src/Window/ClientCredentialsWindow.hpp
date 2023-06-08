@@ -1,8 +1,11 @@
 #ifndef CLIENTCREDENTIALSWINDOW_H
 #define CLIENTCREDENTIALSWINDOW_H
 
+#include <memory>
 #include <QDialog>
 #include <QWidget>
+#include <QJsonObject>
+#include "SharedObjects.hpp"
 
 namespace Ui
 {
@@ -19,12 +22,16 @@ public:
     ClientCredentialsWindow(QWidget *parent = nullptr);
     ~ClientCredentialsWindow();
 
+protected:
+    void setupNextWindow(QJsonObject response);
+
 private slots:
     void on_Login_clicked();
 
     void on_Register_clicked();
 
 private:
+    std::shared_ptr<SharedObjects> ptr;
     Ui::ClientCredentialsWindow *ui;
 };
 

@@ -8,8 +8,11 @@ namespace ENUM
 
 enum FSMType: int32_t
 {
-    MEALY = 0,
-    MOORE = 1,
+    MEALY_SOLVE = 0,
+    MEALY_SUPER = 1,
+    MEALY_TO_MOORE = 2,
+    MOORE_SOLVE = 3,
+    MOORE_SUPER = 4,
 };
 
 }

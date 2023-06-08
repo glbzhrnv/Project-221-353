@@ -21,6 +21,7 @@ public:
         SUCCESS = 0, //< Пользователь успешно создан
         INVALID_TYPE = 1, //< Не верный тип задания
         MUST_BE_LOGGED_ID = 2, //< Пользователь должен быть авторизован
+        ALREADY_DONE = 3, //Задание уже выполнено
     };
 
     GetTaskProcessor();

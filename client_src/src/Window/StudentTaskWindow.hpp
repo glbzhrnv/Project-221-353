@@ -1,8 +1,10 @@
 #ifndef STUDENTTASKWINDOW_HPP
 #define STUDENTTASKWINDOW_HPP
 
+#include <memory>
 #include <QWidget>
 #include <QJsonObject>
+#include "SharedObjects.hpp"
 
 namespace Ui
 {
@@ -28,6 +30,8 @@ private:
     int32_t taskId;
 
     Ui::StudentTaskWindow *ui;
+
+    std::shared_ptr<SharedObjects> ptr;
 };
 
 #endif // STUDENTTASKWINDOW_HPP

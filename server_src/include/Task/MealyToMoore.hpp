@@ -1,0 +1,4 @@
+#ifndef MEALYTOMOORE_HPP
+#define MEALYTOMOORE_HPP
+
+#endif // MEALYTOMOORE_HPP

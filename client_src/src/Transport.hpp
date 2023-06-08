@@ -44,7 +44,7 @@ public:
             result["params"] = *params;
         }
 
-        return QJsonDocument(result).toJson().toStdString();
+        return QJsonDocument(result).toJson(QJsonDocument::Compact).toStdString();
     }
 
     bool sendRequest(ENUM::RequestMethod method, QJsonObject* params = nullptr)
@@ -65,6 +65,8 @@ public:
 
         std::string request = createRequest(method, params);
 
+        qDebug() << "Request: " << request.c_str();
+
         socket->write(request.c_str(), request.size());
 
         return true;
@@ -75,6 +77,8 @@ public:
         socket->waitForReadyRead();
 
         QByteArray result = socket->readAll();
+
+        qDebug() << "Response: " << result;
 
         QJsonDocument rq = QJsonDocument::fromJson(result);
 

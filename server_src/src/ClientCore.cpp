@@ -3,8 +3,10 @@
 #include "Processor/AbstractProcessor.hpp"
 #include "Processor/AuthUserProcessor.hpp"
 #include "Processor/CreateUserProcessor.hpp"
-#include "ClientCore.hpp"
+#include "Processor/GetStatProcessor.hpp"
 #include "Processor/GetTaskProcessor.hpp"
+#include "Processor/SendTaskProcessor.hpp"
+#include "ClientCore.hpp"
 
 ClientCore::ClientCore(QTcpSocket *socket, quint64 socketId): socket(socket), socketId(socketId)
 {
@@ -71,14 +73,21 @@ void ClientCore::slotReadData()
             params = requestObject["params"].toObject();
 
         switch (requestObject["method"].toInt()) {
-            case CreateUserProcessor::METHOD_ID:
-                CreateUserProcessor().process(params, this);
-                break;
-            case AuthUserProcessor::METHOD_ID:
-                CreateUserProcessor().process(params, this);
-                break;
-            case GetTaskProcessor::METHOD_ID:
-                break;
+        case CreateUserProcessor::METHOD_ID:
+            result = CreateUserProcessor().process(params, this);
+            break;
+        case AuthUserProcessor::METHOD_ID:
+            result = AuthUserProcessor().process(params, this);
+            break;
+        case GetTaskProcessor::METHOD_ID:
+            result = GetTaskProcessor().process(params, this);
+            break;
+        case SendTaskProcessor::METHOD_ID:
+            result = SendTaskProcessor().process(params, this);
+            break;
+        case GetStatProcessor::METHOD_ID:
+            result = GetStatProcessor().process(params, this);
+            break;
         }
     }
 

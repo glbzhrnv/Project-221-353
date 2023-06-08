@@ -19,7 +19,7 @@ public:
 
     ~UserStateModel();
 
-    void setSocket(QTcpSocket* socket);
+    void setTransport(Transport* transport);
 
     bool isLoggedIn();
 
@@ -60,7 +60,7 @@ protected:
         bool is_teacher;
     } userData = {};
 
-    Transport* socket;
+    Transport* transport;
 };
 
 #endif // USERSTATEMODEL_HPP

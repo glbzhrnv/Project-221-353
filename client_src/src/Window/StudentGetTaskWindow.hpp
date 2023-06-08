@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <QWidget>
+#include "Enum/FSMType.hpp"
+#include "Window/StudentTaskWindow.hpp"
 #include "SharedObjects.hpp"
 
 namespace Ui
@@ -22,14 +24,25 @@ public:
     ~StudentGetTaskWindow();
 
 private slots:
-    void on_GetMealyMachine_clicked();
+    void on_GetSolveMealy_clicked();
 
-    void on_GetMooreMachine_clicked();
+    void on_GetSuperMealy_clicked();
+
+    void on_GetSuperMoore_clicked();
+
+    void on_GetSolveMoore_clicked();
+
+protected:
+    void updateStat();
+
+    void setupTask(ENUM::FSMType);
 
 private:
     Ui::StudentGetTaskWindow *ui;
 
     std::shared_ptr<SharedObjects> ptr;
+
+    StudentTaskWindow *taskWindow;
 };
 
 #endif // STUDENTGETTASKWINDOW_HPP

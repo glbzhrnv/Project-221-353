@@ -9,10 +9,12 @@ UserStateModel::UserStateModel(QObject* parent): QObject(parent)
 {
 }
 
-void UserStateModel::setSocket(QTcpSocket* socket)
+void UserStateModel::setTransport(Transport* transport)
 {
+    this->transport = transport;
+
     connect(
-        socket, &QTcpSocket::disconnected,
+        transport->getSocket(), &QTcpSocket::disconnected,
         this, &UserStateModel::onDisconnected
     );
 }
@@ -33,15 +35,15 @@ QJsonObject UserStateModel::reg(std::string login, std::string password)
         {"password", password.c_str()}
     };
 
-    socket->sendRequest(ENUM::LOGIN, &params);
+    transport->sendRequest(ENUM::REG, &params);
 
-    QJsonObject response = socket->readResponse();
+    QJsonObject response = transport->readResponse();
 
     if (response["code"].toInt(-1) == 0) {
         emit registered(&response);
 
         state = 1;
-        socket->setToken(response["result"].toObject()["token"].toString().toStdString());
+        transport->setToken(response["result"].toObject()["token"].toString().toStdString());
     }
 
     return response;
@@ -54,15 +56,15 @@ QJsonObject UserStateModel::login(std::string login, std::string password)
         {"password", password.c_str()}
     };
 
-    socket->sendRequest(ENUM::REG, &params);
+    transport->sendRequest(ENUM::LOGIN, &params);
 
-    QJsonObject response = socket->readResponse();
+    QJsonObject response = transport->readResponse();
 
     if (response["code"].toInt(-1) == 0) {
         emit loggedIn(&response);
 
         state = 1;
-        socket->setToken(response["result"].toObject()["token"].toString().toStdString());
+        transport->setToken(response["result"].toObject()["token"].toString().toStdString());
     }
 
     return response;
@@ -70,9 +72,9 @@ QJsonObject UserStateModel::login(std::string login, std::string password)
 
 bool UserStateModel::logout()
 {
-    socket->sendRequest(ENUM::LOGOUT);
+    transport->sendRequest(ENUM::LOGOUT);
 
-    QJsonObject response = socket->readResponse();
+    QJsonObject response = transport->readResponse();
 
     if (response["code"].toInt(-1) == 0) {
         emit loggedOut(&response);
@@ -91,23 +93,23 @@ QJsonObject UserStateModel::getTask(ENUM::FSMType type)
         {"type", type},
     };
 
-    socket->sendRequest(ENUM::GET_TASK, &result);
+    transport->sendRequest(ENUM::GET_TASK, &result);
 
-    return socket->readResponse();
+    return transport->readResponse();
 }
 
 QJsonObject UserStateModel::sendTask(int32_t taskId, QString answer)
 {
     QJsonObject result = {
-        {"task_id", taskId},
+        {"id", taskId},
         {"answer", answer}
     };
 
-    socket->sendRequest(ENUM::SEND_TASK, &result);
+    transport->sendRequest(ENUM::SEND_TASK, &result);
 
     emit taskComplete();
 
-    return socket->readResponse();
+    return transport->readResponse();
 }
 
 QJsonObject UserStateModel::getStat(ENUM::StatType type)
@@ -116,9 +118,9 @@ QJsonObject UserStateModel::getStat(ENUM::StatType type)
         {"type", type},
     };
 
-    socket->sendRequest(ENUM::GET_TASK, &result);
+    transport->sendRequest(ENUM::GET_STAT, &result);
 
-    return socket->readResponse();
+    return transport->readResponse();
 }
 
 void UserStateModel::onDisconnected()

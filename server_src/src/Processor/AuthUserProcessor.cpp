@@ -1,3 +1,4 @@
+#include "Enum/UserAuthStateEnum.hpp"
 #include "Model/UserModel.hpp"
 #include "Model/UserStateModel.hpp"
 #include "Processor/AuthUserProcessor.hpp"
@@ -44,6 +45,7 @@ QByteArray AuthUserProcessor::process(QJsonObject params, ClientCore *client)
 
     userState->tokenCreate();
     userState->dataSet(data);
+    userState->authStatusSet(ENUM::LOGGED_IN);
 
     QJsonObject response = {
         {"login", data.login.c_str()},

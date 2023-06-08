@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
+    <width>405</width>
     <height>240</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>240</width>
+    <width>800</width>
     <height>240</height>
    </size>
   </property>
@@ -27,23 +27,37 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="GetMealyMachine">
+    <widget class="QPushButton" name="GetSuperMealy">
      <property name="text">
-      <string>Хочу автомат Мили</string>
+      <string>Построить суперпозицию автоматов Мили</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="GetMooreMachine">
+    <widget class="QPushButton" name="GetSolveMealy">
      <property name="text">
-      <string>Хочу автомат Мура</string>
+      <string>Написать результат работы автомата Мили</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="GetSuperMoore">
+     <property name="text">
+      <string>Построить суперпозицию двух автоматов Мура</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="GetSolveMoore">
+     <property name="text">
+      <string>Написать результат работы автомата Мура</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="Stats">
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
    </item>
