@@ -11,58 +11,58 @@
 class MooreGen
 {
 public:
-    std::string genTable(
-        const char *states,
-        const char *statesOut,
-        int statesN,
-        int inputsN
-    ) {
-        std::stringstream result;
-        result << inputsN<< "|" << statesN << "|";
+//    std::string genTable(
+//        const char *states,
+//        const char *statesOut,
+//        int statesN,
+//        int inputsN
+//    ) {
+//        std::stringstream result;
+//        result << inputsN<< "|" << statesN << "|";
 
-        for (int i = 0; i < statesN; i++) {
-            result << states[i] << "|" << statesOut[i] << "|";
-        }
+//        for (int i = 0; i < statesN; i++) {
+//            result << states[i] << "|" << statesOut[i] << "|";
+//        }
 
-        for (int i = 0, totalStates = statesN * inputsN; i < totalStates; i++) {
-            result <<
-        }
-    }
+//        for (int i = 0, totalStates = statesN * inputsN; i < totalStates; i++) {
+//            result <<
+//        }
+//    }
 
-    MooreState* parseTable(std::string table)
-    {
+//    MooreState* parseTable(std::string table)
+//    {
 
-    }
+//    }
 
-    MooreState* genSng(const char* alphabet, )
-    {
-        int genState = 0;
-        std::unordered_map<char, MooreState*> states;
+//    MooreState* genSng(const char* alphabet, )
+//    {
+//        int genState = 0;
+//        std::unordered_map<char, MooreState*> states;
 
-        for (char c : input) {
-            switch (c) {
-                case '-':
-                    genState = 0;
-                    continue;
-                case ':':
-                    genState = 1;
-                    continue;
-                case ';':
-                    genState = 2;
-                    continue;
-            }
+//        for (char c : input) {
+//            switch (c) {
+//                case '-':
+//                    genState = 0;
+//                    continue;
+//                case ':':
+//                    genState = 1;
+//                    continue;
+//                case ';':
+//                    genState = 2;
+//                    continue;
+//            }
 
-            switch (genState) {
-                case 1:
-                    states[c] = new MooreState(c);
-                    break;
-                case 2:
-                    break;
-            }
-        }
+//            switch (genState) {
+//                case 1:
+//                    states[c] = new MooreState(c);
+//                    break;
+//                case 2:
+//                    break;
+//            }
+//        }
 
-        return nullptr;
-    }
+//        return nullptr;
+//    }
 
     MooreState* genS(std::string input)
     {
