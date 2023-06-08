@@ -11,23 +11,23 @@
 class MooreGen
 {
 public:
-//    std::string genTable(
-//        const char *states,
-//        const char *statesOut,
-//        int statesN,
-//        int inputsN
-//    ) {
-//        std::stringstream result;
-//        result << inputsN<< "|" << statesN << "|";
+    std::string genTable(
+        const char *states,
+        const char *statesOut,
+        int statesN,
+        int inputsN
+    ) {
+        std::stringstream result;
+        result << inputsN<< "|" << statesN << "|";
 
-//        for (int i = 0; i < statesN; i++) {
-//            result << states[i] << "|" << statesOut[i] << "|";
-//        }
+        for (int i = 0; i < statesN; i++) {
+            result << states[i] << "|" << statesOut[i] << "|";
+        }
 
-//        for (int i = 0, totalStates = statesN * inputsN; i < totalStates; i++) {
-//            result <<
-//        }
-//    }
+        for (int i = 0, totalStates = statesN * inputsN; i < totalStates; i++) {
+            result <<
+        }
+    }
 
 //    MooreState* parseTable(std::string table)
 //    {
