@@ -28,6 +28,8 @@ private slots:
 
     void on_GetSuperMealy_clicked();
 
+    void on_GetMealyToMoore_clicked();
+
     void on_GetSuperMoore_clicked();
 
     void on_GetSolveMoore_clicked();
@@ -35,7 +37,7 @@ private slots:
 protected:
     void updateStat();
 
-    void setupTask(ENUM::FSMType);
+    void setupTask(ENUM::FSMType, std::string msg);
 
 private:
     Ui::StudentGetTaskWindow *ui;

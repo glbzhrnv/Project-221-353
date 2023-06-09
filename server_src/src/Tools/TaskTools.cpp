@@ -5,6 +5,7 @@
 #include "Model/TaskModel.hpp"
 #include "Task/MealySolve.hpp"
 #include "Task/MealySuperposition.hpp"
+#include "Task/MealyToMoore.hpp"
 #include "Task/MooreSolve.hpp"
 #include "Task/MooreSuperposition.hpp"
 #include "Tools/TaskTools.hpp"
@@ -23,6 +24,7 @@ taskData TaskTools::create(ENUM::FSMTypeEnum type)
             data = MealySuperposition::gen(request, solution);
             break;
         case ENUM::MEALY_TO_MOORE:
+            data = MealyToMoore::gen(solution);
             break;
         case ENUM::MOORE_SOLVE:
             data = MooreSolve::gen(request, solution);

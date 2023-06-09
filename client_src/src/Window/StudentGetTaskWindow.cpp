@@ -1,6 +1,5 @@
 #include <memory>
 #include <sstream>
-#include <string>
 #include <QJsonObject>
 #include <QMessageBox>
 #include "Enum/FSMType.hpp"
@@ -41,22 +40,27 @@ StudentGetTaskWindow::~StudentGetTaskWindow()
 
 void StudentGetTaskWindow::on_GetSolveMealy_clicked()
 {
-    setupTask(ENUM::MEALY_SOLVE);
+    setupTask(ENUM::MEALY_SOLVE, "Решите автомат Мили");
 }
 
 void StudentGetTaskWindow::on_GetSuperMealy_clicked()
 {
-    setupTask(ENUM::MEALY_SUPER);
+    setupTask(ENUM::MEALY_SUPER, "Найдите суперпозицию двух автоматов Мили");
+}
+
+void StudentGetTaskWindow::on_GetMealyToMoore_clicked()
+{
+    setupTask(ENUM::MEALY_TO_MOORE, "Преобразуйте данный автомат Мили в автомат Мура");
 }
 
 void StudentGetTaskWindow::on_GetSuperMoore_clicked()
 {
-    setupTask(ENUM::MOORE_SUPER);
+    setupTask(ENUM::MOORE_SUPER, "Найдите суперпозицию двух автоматов Мура");
 }
 
 void StudentGetTaskWindow::on_GetSolveMoore_clicked()
 {
-    setupTask(ENUM::MOORE_SOLVE);
+    setupTask(ENUM::MOORE_SOLVE, "Решите автомат Мура");
 }
 
 void StudentGetTaskWindow::updateStat()
@@ -78,7 +82,7 @@ void StudentGetTaskWindow::updateStat()
     ui->Stats->setText(text.c_str());
 }
 
-void StudentGetTaskWindow::setupTask(ENUM::FSMType type)
+void StudentGetTaskWindow::setupTask(ENUM::FSMType type, std::string msg)
 {
     QJsonObject data = ptr->getUserState()->getTask(type);
     if (data["code"].toInt(-1) != 0) {
@@ -87,7 +91,7 @@ void StudentGetTaskWindow::setupTask(ENUM::FSMType type)
         return;
     }
 
-    taskWindow->setTask(data["response"].toObject());
+    taskWindow->setTask(data["response"].toObject(), msg);
     taskWindow->show();
 
     this->hide();

@@ -25,12 +25,20 @@ public:
 
     void updateStats(QJsonObject data);
 
+private slots:
+    void changeSortOrder(uint32_t col);
+
 private:
     Ui::TeacherStatsWindow *ui;
 
     std::shared_ptr<SharedObjects> ptr;
 
     uint32_t currentLastRow = 0;
+
+    uint32_t offset = 1; // login
+    uint32_t scoreOffset = offset + 5; // число всех задач
+
+    bool sortOrder = false;
 };
 
 #endif // TEACHERSTATSWINDOW_H

@@ -38,21 +38,33 @@ public:
 
     static QJsonObject gen(const std::string &request, std::string &solution)
     {
+        char *m1States = new char[3] {
+            'A', 'B', 'C'
+        };
+        std::string m1 = MooreGen::genTable(m1States, 3, 2, 0);
+
+        char *m2States = new char[3] {
+            'X', 'Y', 'Z'
+        };
+        std::string m2 = MooreGen::genTable(m2States, 3, 2, 0);
+
+        delete[] m1States;
+        delete[] m2States;
+
         QJsonObject result = {
             {"rq", request.c_str()},
-            {"m1", "0"},
-            {"m2", "1"},
+            {"m1", m1.c_str()},
+            {"m2", m2.c_str()},
         };
 
-        MooreGen mg = MooreGen();
-        MooreState* m1 = mg.genS(result["m1"].toString().toStdString());
-        MooreState* m2 = mg.genS(result["m2"].toString().toStdString());
-        MooreSuperposition* ms = new MooreSuperposition(m1, m2);
+        MooreState* m1Machine = MooreGen::parseTable(m1);
+        MooreState* m2Machine = MooreGen::parseTable(m2);
+        MooreSuperposition* ms = new MooreSuperposition(m1Machine, m2Machine);
         solution = ms->run(request);
 
         delete ms;
-        delete m2;
-        delete m1;
+        delete m1Machine;
+        delete m2Machine;
 
         return result;
     }

@@ -1,5 +1,4 @@
-#include <string>
-#include <memory>
+#include <sstream>
 #include <QMessageBox>
 #include "Model/UserStateModel.hpp"
 #include "Window/StudentTaskWindow.hpp"
@@ -20,18 +19,21 @@ StudentTaskWindow::~StudentTaskWindow()
     delete ui;
 }
 
-void StudentTaskWindow::setTask(QJsonObject params)
+void StudentTaskWindow::setTask(QJsonObject params, std::string msg)
 {
+    std::stringstream finalText;
+    finalText << msg << "\n\n" << params["data"].toString().toStdString();
+
     taskId = params["id"].toInt();
-    ui->Content->setText(params["data"].toString());
+    ui->Content->setText(finalText.str().c_str());
 }
 
 void StudentTaskWindow::on_Send_clicked()
 {
     QString answer = ui->Answer->text();
-//    if (answer == "") {
-//        return;
-//    }
+    if (answer == "") {
+        return;
+    }
 
     QJsonObject result = ptr->getUserState()->sendTask(taskId, answer);
 

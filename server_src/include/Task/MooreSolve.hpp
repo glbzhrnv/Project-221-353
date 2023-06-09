@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <QJsonObject>
 #include "Task/MachineSolver.hpp"
 #include "Task/MooreState.hpp"
 #include "Task/MooreGen.hpp"
@@ -32,18 +33,24 @@ public:
 
     static QJsonObject gen(const std::string &request, std::string &solution)
     {
+        char *m1States = new char[3] {
+            'A', 'B', 'C'
+        };
+        std::string m1 = MooreGen::genTable(m1States, 3, 2, 0);
+
+        delete[] m1States;
+
         QJsonObject result = {
             {"rq", request.c_str()},
-            {"m1", "0"},
+            {"m1", m1.c_str()},
         };
 
-        MooreGen mg = MooreGen();
-        MooreState* m1 = mg.genS(result["m1"].toString().toStdString());
-        MooreSolve* ms = new MooreSolve(m1);
+        MooreState* m1Machine = MooreGen::parseTable(m1);
+        MooreSolve* ms = new MooreSolve(m1Machine);
         solution = ms->run(request);
 
         delete ms;
-        delete m1;
+        delete m1Machine;
 
         return result;
     }

@@ -1,6 +1,7 @@
 #ifndef STUDENTTASKWINDOW_HPP
 #define STUDENTTASKWINDOW_HPP
 
+#include <string>
 #include <memory>
 #include <QWidget>
 #include <QJsonObject>
@@ -21,7 +22,7 @@ public:
     StudentTaskWindow(QWidget *parent = nullptr);
     ~StudentTaskWindow();
 
-    void setTask(QJsonObject params);
+    void setTask(QJsonObject params, std::string msg);
 
 private slots:
     void on_Send_clicked();

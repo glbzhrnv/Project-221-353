@@ -1,97 +1,80 @@
 #ifndef MEALYGEN_HPP
 #define MEALYGEN_HPP
 
-#include <stdint.h>
 #include <string>
-#include <unordered_map>
+#include <sstream>
+#include <stdint.h>
+#include <map>
 #include <Task/MealyState.hpp>
 
 class MealyGen
 {
 public:
-//    MooreState* genS(const std::string &input)
-//    {
-//        int genState = 0;
-//        std::unordered_map<char, MooreState*> states;
+    static std::string genTable(
+        const char *statesOut,
+        int32_t statesN,
+        int32_t inputsN,
+        int32_t n0
+    ) {
+        if (n0 > inputsN) {
+            return "";
+        }
 
-//        for (char c : input) {
-//            switch (c) {
-//                case '-':
-//                    genState = 0;
-//                    continue;
-//                case ':':
-//                    genState = 1;
-//                    continue;
-//                case ';':
-//                    genState = 2;
-//                    continue;
-//            }
+        std::stringstream result;
+        result << inputsN << "|" << statesN << "|";
 
-//            switch (genState) {
-//                case 1:
-//                    states[c] = new MooreState(c);
-//                    break;
-//                case 2:
-//                    break;
-//            }
-//        }
+        for (int32_t i = 0; i < statesN; i++) {
+            result << statesOut[i] << "|";
+        }
 
-//        return nullptr;
-//    }
+        for (int32_t i = 0, totalStates = statesN * inputsN; i < totalStates; i++) {
+            result << std::rand() % inputsN << "|" << std::rand() % statesN << "|";
+        }
 
-    MealyState* genS(std::string input)
+        result << n0;
+
+        return result.str();
+    }
+
+    static MealyState* parseTable(std::string table)
     {
-        for (char c : input) {
-            switch(c) {
-                case '0': {
-                    // Создание состояний
-                    MealyState* stateA = new MealyState('A');
-                    MealyState* stateB = new MealyState('B');
-                    MealyState* stateC = new MealyState('C');
+        std::map<int32_t, MealyState*> states;
 
-                    // Установка переходов для состояния A
-                    stateA->addTransition('0', stateB, '1');
-                    stateA->addTransition('1', stateC, '0');
+        std::stringstream values(table);
+        std::string value = "";
 
-                    // Установка переходов для состояния B
-                    stateB->addTransition('0', stateA, '0');
-                    stateB->addTransition('1', stateC, '1');
+        std::getline(values, value, '|');
+        int32_t inputsN = std::stoi(value);
 
-                    // Установка переходов для состояния C
-                    stateC->addTransition('0', stateC, '1');
-                    stateC->addTransition('1', stateB, '1');
+        std::getline(values, value, '|');
+        int32_t statesN = std::stoi(value);
 
-                    state = 1;
+        for (int32_t i = 0; i < statesN; i++) {
+            std::getline(values, value, '|');
 
-                    return stateA;
-                }
-                default: {
-                    MealyState* stateX = new MealyState('X');
-                    MealyState* stateY = new MealyState('Y');
-                    MealyState* stateZ = new MealyState('Z');
+            states[i] = new MealyState(*value.c_str());
+        }
 
-                    // Установка переходов для первого автомата
-                    stateZ->addTransition('0', stateY, '0');
-                    stateZ->addTransition('1', stateZ, '1');
+        int32_t nextOutput;
+        for (auto state : states) {
+            for (int32_t j = 0; j < inputsN; j++) {
+                std::getline(values, value, '|');
+                nextOutput = std::stoi(value);
 
-                    stateX->addTransition('0', stateX, '1');
-                    stateX->addTransition('1', stateZ, '0');
+                std::getline(values, value, '|');
 
-                    stateY->addTransition('0', stateZ, '0');
-                    stateY->addTransition('1', stateY, '0');
-
-                    state = 0;
-
-                    return stateX;
-                }
+                state.second->addTransition(
+                    *std::to_string(j).c_str(),
+                    states[std::stoi(value)],
+                    *std::to_string(nextOutput).c_str()
+                );
             }
         }
 
-        return nullptr;
-    }
+        std::getline(values, value, '|');
 
-protected:
-    int state = 0 ;
+        return states[std::stoi(value)];
+    }
 };
 
 #endif // MEALYGEN_HPP

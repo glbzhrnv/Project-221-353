@@ -15,7 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += $$PWD/include/
 
-#LIBS += -largon2
+LIBS += -largon2
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

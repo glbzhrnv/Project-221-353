@@ -41,6 +41,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="GetMealyToMoore">
+     <property name="text">
+      <string>Написать результат преобразования автомата Мили в Мура</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="GetSuperMoore">
      <property name="text">
       <string>Построить суперпозицию двух автоматов Мура</string>

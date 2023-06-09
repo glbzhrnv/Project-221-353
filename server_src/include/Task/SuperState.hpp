@@ -1,4 +1,0 @@
-#ifndef SUPERSTATE_HPP
-#define SUPERSTATE_HPP
-
-#endif // SUPERSTATE_HPP

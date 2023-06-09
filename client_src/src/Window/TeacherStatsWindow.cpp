@@ -15,12 +15,38 @@ TeacherStatsWindow::TeacherStatsWindow(QWidget *parent)
 
     QJsonObject response = ptr->getUserState()->getStat(ENUM::TEACHER);
 
+    QHeaderView *header = ui->TasksTable->horizontalHeader();
+
+    connect(
+        header, &QHeaderView::sectionClicked,
+        this, &TeacherStatsWindow::changeSortOrder
+    );
+
     updateStats(response);
+
+    header->setSortIndicator(scoreOffset, Qt::SortOrder::AscendingOrder);
 }
 
 TeacherStatsWindow::~TeacherStatsWindow()
 {
     delete ui;
+}
+
+void TeacherStatsWindow::changeSortOrder(uint32_t col)
+{
+    if (col != scoreOffset) {
+        return;
+    }
+
+    ui->TasksTable->sortItems(
+        col,
+        (sortOrder
+            ? Qt::SortOrder::AscendingOrder
+            : Qt::SortOrder::DescendingOrder
+        )
+    );
+
+    sortOrder = !sortOrder;
 }
 
 void TeacherStatsWindow::updateStats(QJsonObject data)
@@ -50,11 +76,17 @@ void TeacherStatsWindow::updateStats(QJsonObject data)
             {ENUM::MOORE_SUPER, -1},
         };
 
+        int score = 0;
         for (auto res : rowObj["results"].toObject()) {
             QJsonObject resObj = res.toObject();
 
             qDebug() << resObj;
-            currentRes[resObj["type"].toInt(-1)] = (int32_t)resObj["is_correct"].toBool();
+            if (resObj["is_correct"].toBool()) {
+                currentRes[resObj["type"].toInt(-1)] = 1;
+               score++;
+            } else {
+                currentRes[resObj["type"].toInt(-1)] = 0;
+            }
         }
 
         tbl->insertRow(currentLastRow);
@@ -63,7 +95,7 @@ void TeacherStatsWindow::updateStats(QJsonObject data)
         );
         tbl->setItem(currentLastRow, 0, loginItem);
 
-        uint32_t offset = 1;
+
         for (uint32_t i = 0; i < 5; i++) {
             QTableWidgetItem *msgItem = new QTableWidgetItem(
                 possibleMsg[currentRes[i]].c_str()
@@ -71,9 +103,17 @@ void TeacherStatsWindow::updateStats(QJsonObject data)
 
             tbl->setItem(currentLastRow, i + offset, msgItem);
         }
+
+        tbl->setItem(
+            currentLastRow,
+            scoreOffset,
+            new QTableWidgetItem(
+                QString::number(score)
+            )
+        );
+
         currentLastRow++;
     }
 
-
-
+    changeSortOrder(scoreOffset);
 }

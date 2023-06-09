@@ -34,18 +34,24 @@ public:
 
     static QJsonObject gen(const std::string &request, std::string &solution)
     {
+        char *m1States = new char[3] {
+            'A', 'B', 'C'
+        };
+        std::string m1 = MealyGen::genTable(m1States, 3, 2, 0);
+
+        delete[] m1States;
+
         QJsonObject result = {
             {"rq", request.c_str()},
-            {"m1", "1"}
+            {"m1", m1.c_str()},
         };
 
-        MealyGen mg = MealyGen();
-        MealyState* m1 = mg.genS(result["m1"].toString().toStdString());
-        MealySolve* ms = new MealySolve(m1);
+        MealyState* m1Machine = MealyGen::parseTable(m1);
+        MealySolve* ms = new MealySolve(m1Machine);
         solution = ms->run(request);
 
         delete ms;
-        delete m1;
+        delete m1Machine;
 
         return result;
     }

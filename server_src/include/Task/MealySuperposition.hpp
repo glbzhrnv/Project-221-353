@@ -43,21 +43,33 @@ public:
 
     static QJsonObject gen(const std::string &request, std::string &solution)
     {
+        char *m1States = new char[3] {
+            'A', 'B', 'C'
+        };
+        std::string m1 = MealyGen::genTable(m1States, 3, 2, 0);
+
+        char *m2States = new char[3] {
+            'X', 'Y', 'Z'
+        };
+        std::string m2 = MealyGen::genTable(m2States, 3, 2, 0);
+
+        delete[] m1States;
+        delete[] m2States;
+
         QJsonObject result = {
             {"rq", request.c_str()},
-            {"m1", "0"},
-            {"m2", "1"},
+            {"m1", m1.c_str()},
+            {"m2", m2.c_str()},
         };
 
-        MealyGen mg = MealyGen();
-        MealyState* m1 = mg.genS(result["m1"].toString().toStdString());
-        MealyState* m2 = mg.genS(result["m2"].toString().toStdString());
-        MealySuperposition* ms = new MealySuperposition(m1, m2);
+        MealyState* m1Machine = MealyGen::parseTable(m1);
+        MealyState* m2Machine = MealyGen::parseTable(m2);
+        MealySuperposition* ms = new MealySuperposition(m1Machine, m2Machine);
         solution = ms->run(request);
 
         delete ms;
-        delete m2;
-        delete m1;
+        delete m1Machine;
+        delete m2Machine;
 
         return result;
     }
