@@ -7,6 +7,9 @@
 #include <map>
 #include <Task/MealyState.hpp>
 
+/**
+ * @brief Генерирует автомат Мили на основе заданных параметров
+ */
 class MealyGen
 {
 public:

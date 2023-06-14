@@ -81,6 +81,9 @@ protected:
      */
     SharedObjects& operator=(SharedObjects&) = delete;
 
+    /**
+     * @brief Выполнить инициализацию настроек
+     */
     void setupSettings();
 
     /**

@@ -6,7 +6,9 @@
 namespace ENUM
 {
 
-/// Возможные состояния пользователя
+/**
+ * @brief Варинты состояний пользователя
+ */
 enum UserAuthStateEnum: int32_t
 {
     NO_AUTH = 0, //< Не авторизован

@@ -6,6 +6,9 @@
 namespace ENUM
 {
 
+/**
+ * @brief Идентификаторы возможных заданий
+ */
 enum FSMType: int32_t
 {
     MEALY_SOLVE = 0,

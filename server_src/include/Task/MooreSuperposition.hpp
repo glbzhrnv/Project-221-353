@@ -7,6 +7,9 @@
 #include "Task/MooreState.hpp"
 #include "Task/MooreGen.hpp"
 
+/**
+ * @brief Находит суперпозицию двух автоматов Мура
+ */
 class MooreSuperposition: public MachineSolver
 {
 public:

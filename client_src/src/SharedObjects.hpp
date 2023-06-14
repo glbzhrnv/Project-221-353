@@ -48,19 +48,46 @@ public:
     const QJsonObject getSettings();
 
     /**
-     * @brief Возвращает экземпляр сокета
-     * @return Transport Экземпляр сокета
+     * @brief Возвращает экземпляр соединения
+     * @return Соединение
      */
     Transport* getTransport();
 
+    /**
+     * @brief Возвращает объект с данными пользователя
+     * @return Данные пользователя
+     */
     UserStateModel* getUserState();
 
+    /**
+     * @brief Формирует идентификатор окна, подходящий под стандарты хранилища
+     * @param name - Идентификатор окна
+     * @param copy - Идентификатор копии
+     * @return Сформированный идентификатор
+     */
     uint64_t windowIdGet(uint32_t name, uint32_t copy);
 
+    /**
+     * @brief Проверяет существование окна в хранилище
+     * @param windowId - Идентификатор окна
+     * @param copy - Идентификатор копии
+     * @return Результат проверки
+     */
     bool windowExists(uint32_t name, uint32_t copy);
 
+    /**
+     * @brief Проверяет существование окна в хранилище
+     * @param windowId - Идентификатор окна
+     * @return Результат проверки
+     */
     bool windowExists(uint64_t windowId);
 
+    /**
+     * @brief Добавляет окно в хранилище
+     * @param window - Экземпляр окна
+     * @param name - Идентификатор окна
+     * @param copy - Идентификатор копии
+     */
     void windowSet(QWidget* window, uint32_t name, uint32_t copy = 0);
 
     template <class T = QWidget>
@@ -75,6 +102,9 @@ public:
         return std::static_pointer_cast<T>(windowsHeap[windowId]);
     }
 
+    /**
+     * @brief Добавляет адаптер в хранилище
+     */
     void adapterAdd(AbstractAdapter*);
 
 protected:

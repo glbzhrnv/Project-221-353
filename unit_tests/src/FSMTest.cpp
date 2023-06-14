@@ -1,4 +1,3 @@
-#include <QDebug>
 #include <string>
 #include <QtTest>
 #include <time.h>

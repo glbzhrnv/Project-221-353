@@ -12,6 +12,9 @@ namespace Ui
     class StudentTaskWindow;
 }
 
+/**
+ * @brief Окно с заданием
+ */
 class StudentTaskWindow: public QWidget
 {
     Q_OBJECT
@@ -22,6 +25,11 @@ public:
     StudentTaskWindow(QWidget *parent = nullptr);
     ~StudentTaskWindow();
 
+    /**
+     * @brief Устанавливает содержимое задания
+     * @param params - Данные задания
+     * @param msg - Дополнительный текст
+     */
     void setTask(QJsonObject params, std::string msg);
 
 private slots:

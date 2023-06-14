@@ -8,6 +8,9 @@ namespace Ui {
     class NotificationWindow;
 }
 
+/**
+ * @brief Окно уведомления пользователя
+ */
 class NotificationWindow : public QDialog
 {
     Q_OBJECT
@@ -18,6 +21,10 @@ public:
     NotificationWindow(QWidget *parent = nullptr);
     ~NotificationWindow();
 
+    /**
+     * @brief Устанавливает содержимое сообщения
+     * @param text - Текст сообщения
+     */
     void updateText(std::string text);
 
 private:

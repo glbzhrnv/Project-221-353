@@ -11,6 +11,9 @@
 #include "Enum/RequestMethod.hpp"
 #include "qtcpsocket.h"
 
+/**
+ * @brief Организует приёмопередачу данных с сервером
+ */
 class Transport
 {
 public:
@@ -32,6 +35,12 @@ public:
     {
     }
 
+    /**
+     * @brief Оформляет передаваеммые к серверу, данные
+     * @param method - Идентификатор метода
+     * @param params - Передаваемые данные
+     * @return
+     */
     static std::string  createRequest(
         ENUM::RequestMethod method,
         QJsonObject* params = nullptr
@@ -47,6 +56,12 @@ public:
         return QJsonDocument(result).toJson(QJsonDocument::Compact).toStdString();
     }
 
+    /**
+     * @brief Отправляет данные на сервер
+     * @param method - Идентификатор метода
+     * @param params - Передаваемые данные
+     * @return Статус передачи
+     */
     bool sendRequest(ENUM::RequestMethod method, QJsonObject* params = nullptr)
     {
         QJsonObject localParams = {};
@@ -72,6 +87,10 @@ public:
         return true;
     }
 
+    /**
+     * @brief Получает данные, переданные сервером
+     * @return Ответ сервера
+     */
     QJsonObject readResponse()
     {
         socket->waitForReadyRead();
@@ -90,6 +109,10 @@ public:
         this->token = token;
     }
 
+    /**
+     * @brief Получить сокет
+     * @return
+     */
     QTcpSocket* getSocket()
     {
         return socket;
@@ -97,6 +120,7 @@ public:
 
 protected:
     QTcpSocket *socket;
+
     std::string token = "";
 };
 

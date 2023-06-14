@@ -12,6 +12,9 @@ namespace Ui
     class StudentGetTaskWindow;
 }
 
+/**
+ * @brief Окно получения задания
+ */
 class StudentGetTaskWindow: public QWidget
 {
     Q_OBJECT
@@ -35,9 +38,17 @@ private slots:
     void on_GetSolveMoore_clicked();
 
 protected:
+    /**
+     * @brief Обновляет статистику выполненных, пользователем, заданий
+     */
     void updateStat();
 
-    void setupTask(ENUM::FSMType, std::string msg);
+    /**
+     * @brief Запрашивает с сервера новое задание
+     * @param type - Тип задания
+     * @param msg - Дополнительный текст задания
+     */
+    void setupTask(ENUM::FSMType type, std::string msg);
 
 private:
     Ui::StudentGetTaskWindow *ui;

@@ -3,6 +3,9 @@
 
 #include <string>
 
+/**
+ * @brief Абстрактный класс, представляющий алгоритм решения автомата
+ */
 class MachineSolver
 {
 public:

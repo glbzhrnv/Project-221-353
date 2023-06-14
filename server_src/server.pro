@@ -85,8 +85,6 @@ HEADERS += \
     include/Task/MooreSolve.hpp \
     include/Task/MooreState.hpp \
     include/Task/MooreSuperposition.hpp \
-    include/Task/SuperState.hpp \
-    include/Task/SuperpositionMoore.hpp \
     include/Tools/PasswordTools.hpp \
     include/Tools/TaskTools.hpp
 

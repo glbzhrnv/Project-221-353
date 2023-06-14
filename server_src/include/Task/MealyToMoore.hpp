@@ -8,6 +8,9 @@
 #include "Task/MachineSolver.hpp"
 #include "Task/MealyGen.hpp"
 
+/**
+ * @brief Производит преобразование автомата Мили в автомат Мура
+ */
 class MealyToMoore: public MachineSolver
 {
 public:

@@ -8,6 +8,9 @@
 #include "Task/MooreState.hpp"
 #include "Task/MooreGen.hpp"
 
+/**
+ * @brief Находит решение автомата Мура
+ */
 class MooreSolve: public MachineSolver
 {
 public:

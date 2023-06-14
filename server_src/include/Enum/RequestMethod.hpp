@@ -5,6 +5,9 @@
 
 namespace ENUM {
 
+/**
+ * @brief Идентификаторы возможных запросов к серверу
+ */
 enum RequestMethod: int32_t
 {
     REG = 1,

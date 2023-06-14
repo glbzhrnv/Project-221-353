@@ -12,6 +12,9 @@ namespace Ui
     class ClientCredentialsWindow;
 };
 
+/**
+ * @brief Окно авторизации
+ */
 class ClientCredentialsWindow: public QDialog
 {
     Q_OBJECT
@@ -23,6 +26,10 @@ public:
     ~ClientCredentialsWindow();
 
 protected:
+    /**
+     * @brief Производит переход к следующему окну
+     * @param response Ответ сервера
+     */
     void setupNextWindow(QJsonObject response);
 
 private slots:

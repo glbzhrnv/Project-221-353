@@ -8,6 +8,11 @@
 class TaskTools
 {
 public:
+    /**
+     * @brief Создаёт задание на основе переданного типа
+     * @param type Тип задания
+     * @return Структура с данными задания
+     */
     static taskData create(ENUM::FSMTypeEnum type);
 };
 

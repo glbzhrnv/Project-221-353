@@ -7,6 +7,9 @@
 #include "Task/MealyState.hpp"
 #include "Task/MealyGen.hpp"
 
+/**
+ * @brief Находит решение автомата Мили
+ */
 class MealySolve: public MachineSolver
 {
 public:

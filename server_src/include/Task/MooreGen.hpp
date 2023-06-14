@@ -7,6 +7,9 @@
 #include <map>
 #include <Task/MooreState.hpp>
 
+/**
+ * @brief Генерирует автомат Мура на основе заданных параметров
+ */
 class MooreGen
 {
 public:

@@ -7,6 +7,9 @@
 #include "Task/MealyState.hpp"
 #include "Task/MealyGen.hpp"
 
+/**
+ * @brief Находит суперпозицию двух автоматов Мили
+ */
 class MealySuperposition: public MachineSolver
 {
 public:

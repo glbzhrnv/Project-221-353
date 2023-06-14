@@ -4,7 +4,9 @@
 #include <unordered_map>
 #include "Task/MachineState.hpp"
 
-// Класс состояния автомата Мура
+/**
+ * @brief Хранит состояние автомата Мура
+ */
 class MooreState: public MachineState
 {
 public:

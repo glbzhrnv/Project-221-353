@@ -43,6 +43,10 @@ public:
      */
     quint64 getSocketId();
 
+    /**
+     * @brief Возвращает данные пользователя
+     * @return
+     */
     Model::UserStateModel* userStateGet();
 
 public slots:
@@ -65,6 +69,9 @@ protected:
      */
     int32_t state = 0;
 
+    /**
+     * @brief Структура с данными пользователя
+     */
     Model::UserStateModel userState;
 
     /**

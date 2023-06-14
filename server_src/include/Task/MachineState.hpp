@@ -4,6 +4,9 @@
 #include <string>
 #include <unordered_map>
 
+/**
+ * @brief Абстрактный класс, представляющий состояние автомата
+ */
 class MachineState
 {
 public:

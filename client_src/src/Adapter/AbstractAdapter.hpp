@@ -8,6 +8,7 @@ class AbstractAdapter: public QObject
     Q_OBJECT
 public:
     AbstractAdapter(QWidget *parent = nullptr);
+
     ~AbstractAdapter();
 };
 

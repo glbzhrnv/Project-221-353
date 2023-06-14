@@ -23,9 +23,17 @@ public:
 
     ~TeacherStatsWindow();
 
+    /**
+     * @brief Обновляет содержимое таблицы со статистикой
+     * @param data - Данные статистики
+     */
     void updateStats(QJsonObject data);
 
 private slots:
+    /**
+     * @brief Изменяет порядок отображения данных статистики
+     * @param col - Идентификатор столбца
+     */
     void changeSortOrder(uint32_t col);
 
 private:

@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include "Task/MachineState.hpp"
 
+/**
+ * @brief Хранит одно состояние автомата Мили
+ */
 class MealyState: public MachineState
 {
 public:
