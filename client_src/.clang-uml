@@ -1,18 +1,34 @@
-compilation_database_dir: .
+compilation_database_dir: ./build/
 output_directory: puml
 diagrams:
-    AbstractAdapter:
+    Client:
         type: class
         glob:
-            - ./src/*/*.cpp
+#            - src/**.hpp
+            - src/**.cpp
         include:
             elements:
                 - AbstractAdapter
                 - ConnectionStatusAdapter
+                - FSMType
+                - RequestMethod
+                - StatType
+                - UserStateModel
+                - ClientCredentialsWindow
+                - NotificationWindow
+                - StudentGetTaskWindow
+                - StudentTaskWindow
+                - TeacherStatsWindow
+                - SharedObjects
+                - Transport
+
+    Exceptions:
+        type: class
+        glob:
+#            - src/**.hpp
+            - src/**.cpp
+        include:
+            elements:
                 - AbstractRuntimeException
                 - ConfigurationException
                 - ConnectionException
-                - ClientCredentialsWindow
-                - NotificationWindow
-                - TeacherStatsWindow
-                - SharedObjects

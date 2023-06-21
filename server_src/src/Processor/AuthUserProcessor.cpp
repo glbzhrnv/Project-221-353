@@ -43,7 +43,6 @@ QByteArray AuthUserProcessor::process(QJsonObject params, ClientCore *client)
         return createResponse(ResponseCode::INVALID_PASSWORD);
     }
 
-    userState->tokenCreate();
     userState->dataSet(data);
     userState->authStatusSet(ENUM::LOGGED_IN);
 
@@ -51,7 +50,6 @@ QByteArray AuthUserProcessor::process(QJsonObject params, ClientCore *client)
         {"login", data.login.c_str()},
         {"password", data.password.c_str()},
         {"is_teacher", data.is_teacher},
-        {"token", userState->tokenGet().c_str()}
     };
 
     return createResponse(ResponseCode::SUCCESS, &response);

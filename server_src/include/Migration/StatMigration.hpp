@@ -4,6 +4,9 @@
 #include <QSqlQuery>
 #include "AbstractMigration.hpp"
 
+/**
+ * @brief Миграция, создающая таблицу со статистикой
+ */
 class StatMigration: public AbstractMigration
 {
 public:

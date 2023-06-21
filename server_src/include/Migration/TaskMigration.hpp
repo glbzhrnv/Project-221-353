@@ -4,6 +4,9 @@
 #include <QSqlQuery>
 #include "AbstractMigration.hpp"
 
+/**
+ * @brief Миграция, создающая таблицу с заданиями
+ */
 class TaskMigration: public AbstractMigration
 {
 public:

@@ -4,6 +4,9 @@
 #include <QSqlQuery>
 #include "AbstractMigration.hpp"
 
+/**
+ * @brief Миграция, создающая таблицу с учётными данными пользователей
+ */
 class UserMigration: public AbstractMigration
 {
 public:

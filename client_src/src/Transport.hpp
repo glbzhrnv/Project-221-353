@@ -57,6 +57,15 @@ public:
     }
 
     /**
+     * @brief Возвращает экземпляр сокета
+     * @return Указатель на сокет
+     */
+    QTcpSocket* getSocket()
+    {
+        return socket;
+    }
+
+    /**
      * @brief Отправляет данные на сервер
      * @param method - Идентификатор метода
      * @param params - Передаваемые данные
@@ -64,19 +73,9 @@ public:
      */
     bool sendRequest(ENUM::RequestMethod method, QJsonObject* params = nullptr)
     {
-        QJsonObject localParams = {};
-//        if (params != nullptr) {
-//            localParams = *params;
-//        }
-
-//        if (token != "") {
-//            localParams["token"] = token.c_str();
-//        }
-
-        socket->state();
-//        if (socket->state() == QTcpSocket::ConnectedState) {
-//            return false;
-//        }
+        if (socket->state() != QTcpSocket::ConnectedState) {
+            return false;
+        }
 
         std::string request = createRequest(method, params);
 
@@ -104,24 +103,8 @@ public:
         return rq.object();
     }
 
-    void setToken(std::string token)
-    {
-        this->token = token;
-    }
-
-    /**
-     * @brief Получить сокет
-     * @return
-     */
-    QTcpSocket* getSocket()
-    {
-        return socket;
-    }
-
 protected:
     QTcpSocket *socket;
-
-    std::string token = "";
 };
 
 #endif // TRANSPORT_CPP

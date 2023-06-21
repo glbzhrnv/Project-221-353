@@ -7,35 +7,45 @@
 
 namespace Model {
 
+/**
+ * @brief Класс, хранящий в себе текущее состяние пользователя
+ */
 class UserStateModel
 {
 public:
-    void tokenSet(std::string);
-
-    std::string tokenGet();
-
-    bool isTokenExists();
-
+    /**
+     * @brief Обновляет состояние авторизации
+     * @param value - Идентификатор состяния
+     */
     void authStatusSet(ENUM::UserAuthStateEnum value);
 
-    std::string tokenCreate();
-
-    bool tokenCheck(std::string token);
-
+    /**
+     * @brief Получение текущего состояния авторизации
+     * @return Идентификатор состояния
+     */
     ENUM::UserAuthStateEnum authStatusGet();
 
+    /**
+     * @brief Устанавливает учётные данные пользователя
+     * @param value - Учётные данные
+     */
     void dataSet(Model::UserModel::userData value);
 
+    /**
+     * @brief Возвращает текущие учётные данные пользователя
+     * @return Указатель на учётные данные
+     */
     Model::UserModel::userData* dataGet();
 
 protected:
     /**
-     * Текущий статус пользователя
+     * @brief Текущий состояние авторизации
      */
     ENUM::UserAuthStateEnum authStatus = ENUM::NO_AUTH;
 
-    std::string token = "";
-
+    /**
+     * @brief Данные состояния пользователя
+     */
     Model::UserModel::userData userData = {};
 };
 

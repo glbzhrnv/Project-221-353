@@ -9,6 +9,9 @@
 #include "Migration/UserMigration.hpp"
 #include "Migration/StatMigration.hpp"
 
+/**
+ * @brief Индекс миграции. Произовдит выполнение всех миграций
+ */
 class MigrationsIndex
 {
 public:

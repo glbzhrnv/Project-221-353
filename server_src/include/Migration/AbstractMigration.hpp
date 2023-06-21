@@ -3,6 +3,9 @@
 
 #include <QSqlDatabase>
 
+/**
+ * @brief Абстрактный класс для миграции
+ */
 class AbstractMigration
 {
 public:

@@ -43,7 +43,6 @@ QJsonObject UserStateModel::reg(std::string login, std::string password)
         emit registered(&response);
 
         state = 1;
-        transport->setToken(response["result"].toObject()["token"].toString().toStdString());
     }
 
     return response;
@@ -64,7 +63,6 @@ QJsonObject UserStateModel::login(std::string login, std::string password)
         emit loggedIn(&response);
 
         state = 1;
-        transport->setToken(response["result"].toObject()["token"].toString().toStdString());
     }
 
     return response;

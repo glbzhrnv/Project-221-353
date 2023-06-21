@@ -4,13 +4,9 @@ diagrams:
     Server:
         type: class
         glob:
-            - include/**.hpp
             - src/**.cpp
             - src/**.hpp
         include:
-#            namespaces:
-#                - ENUM
-#                - Model
             elements:
                 - FSMTypeEnum
                 - RequestMethod
@@ -31,20 +27,22 @@ diagrams:
                 - ClientCore
                 - ServerCore
                 - SharedObjects
+
     Exceptions:
         type: class
         glob:
-            - include/**.hpp
+            - src/**.hpp
             - src/**.cpp
         include:
             elements:
                 - AbstractRuntimeException
                 - ConfigurationException
                 - ConnectionException
+
     Solvers:
         type: class
         glob:
-            - include/**.hpp
+            - src/**.hpp
             - src/**.cpp
         include:
             elements:
@@ -59,10 +57,10 @@ diagrams:
                 - MooreSolve
                 - MooreState
                 - MooreSuperposition
+
     Migrations:
         type: class
         glob:
-            - include/**.hpp
             - src/**.cpp
         include:
             elements:

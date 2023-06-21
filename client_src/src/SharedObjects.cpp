@@ -1,6 +1,5 @@
 #include <QFile>
 #include <QFileInfo>
-//#include <QIODevice>
 #include <QJsonDocument>
 #include <memory>
 #include "Adapter/AbstractAdapter.hpp"
