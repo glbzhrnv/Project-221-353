@@ -1,0 +1,71 @@
+compilation_database_dir: ./build/
+output_directory: puml
+diagrams:
+    Server:
+        type: class
+        glob:
+            - src/**.cpp
+            - src/**.hpp
+        include:
+            elements:
+                - FSMTypeEnum
+                - RequestMethod
+                - StatType
+                - UserAuthStateEnum
+                - StatModel
+                - TaskModel
+                - UserModel
+                - UserStateModel
+                - AbstractProcessor
+                - AuthUserProcessor
+                - CreateUserProcessor
+                - GetStatProcessor
+                - GetTaskProcessor
+                - SendTaskProcessor
+                - PasswordTools
+                - TaskTools
+                - ClientCore
+                - ServerCore
+                - SharedObjects
+
+    Exceptions:
+        type: class
+        glob:
+            - src/**.hpp
+            - src/**.cpp
+        include:
+            elements:
+                - AbstractRuntimeException
+                - ConfigurationException
+                - ConnectionException
+
+    Solvers:
+        type: class
+        glob:
+            - src/**.hpp
+            - src/**.cpp
+        include:
+            elements:
+                - MachineSolver
+                - MachineState
+                - MealyGen
+                - MealySolve
+                - MealyState
+                - MealySuperposition
+                - MealyToMoore
+                - MooreGen
+                - MooreSolve
+                - MooreState
+                - MooreSuperposition
+
+    Migrations:
+        type: class
+        glob:
+            - src/**.cpp
+        include:
+            elements:
+                - AbstractMigration
+                - MigrationsIndex
+                - StatMigration
+                - TaskMigration
+                - UserMigration
